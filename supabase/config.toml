@@ -1,0 +1,22 @@
+project_id = "lexi"
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+[db]
+port = 54322
+major_version = 17
+[auth]
+enabled = true
+site_url = "http://localhost:5173"
+additional_redirect_urls = ["http://127.0.0.1:5173", "http://localhost:5173/reset-password", "http://127.0.0.1:5173/reset-password"]
+[functions.vocabulary]
+verify_jwt = false
+[functions.review]
+verify_jwt = false
+[functions.reverse-search]
+verify_jwt = false
+[functions.ai]
+verify_jwt = false
+[functions.notifications]
+verify_jwt = false
