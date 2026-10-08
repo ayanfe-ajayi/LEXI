@@ -25,7 +25,11 @@ const user = {
   user_metadata: { display_name: "Alex" },
   app_metadata: { provider: "email" },
 };
-function fixtures() {
+function fixtures(pronunciation?: {
+  accent: string;
+  ipa: string;
+  audio_url: string | null;
+}) {
   const words = names.map((word, i) => ({
     id: `user-${i}`,
     user_id: USER,
@@ -38,7 +42,9 @@ function fixtures() {
     words: {
       id: wordIds[i],
       word,
-      pronunciations: [{ accent: "English", ipa: "/test/", audio_url: null }],
+      pronunciations: [
+        pronunciation || { accent: "English", ipa: "/test/", audio_url: null },
+      ],
       word_senses: [
         {
           id: senseIds[i],
@@ -80,8 +86,11 @@ function fixtures() {
   }));
   return { words, progress };
 }
-export async function signedIn(page: Page) {
-  const { words, progress } = fixtures();
+export async function signedIn(
+  page: Page,
+  pronunciation?: { accent: string; ipa: string; audio_url: string | null },
+) {
+  const { words, progress } = fixtures(pronunciation);
   await page.addInitScript(
     ({ user }) => {
       localStorage.setItem(

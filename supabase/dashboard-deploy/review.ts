@@ -1,4 +1,5 @@
-// Generated from supabase/functions. Paste all of this into the Dashboard index.ts.
+// @ts-nocheck
+// Generated JavaScript from checked TypeScript. Paste all of this into the Dashboard index.ts.
 
 // supabase/functions/review/index.ts
 import { z as z3 } from "npm:zod@4.1.11";
@@ -124,11 +125,27 @@ async function aiRequest(path, payload) {
   } catch {
     throw new AppError(503, "The AI service took too long. Please try again.");
   }
-  if (!response.ok)
+  if (!response.ok) {
+    const detail = await response.json().catch(() => null);
+    const code = detail?.error?.code;
+    const type = detail?.error?.type;
+    const billing = [
+      "insufficient_quota",
+      "credit_balance_exhausted",
+      "billing_hard_limit_reached",
+      "organization_spend_limit_exceeded",
+      "project_spend_limit_exceeded",
+      "organization_usage_limit_exceeded"
+    ].includes(code) || type === "insufficient_quota";
+    console.warn("AI provider request failed", {
+      status: response.status,
+      category: billing ? "billing" : response.status === 429 ? "rate_limit" : "provider"
+    });
     throw new AppError(
       response.status === 429 ? 429 : 503,
-      response.status === 429 ? "The AI service is busy. Please try again shortly." : "The AI service is unavailable. Please try again."
+      billing ? "The AI account has no available credits or has reached its spending limit. Check the provider's billing settings." : response.status === 429 ? "The AI service is busy. Please try again shortly." : "The AI service is unavailable. Please try again."
     );
+  }
   return response.json();
 }
 function model(strong = false) {

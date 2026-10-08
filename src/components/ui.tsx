@@ -1,6 +1,8 @@
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { ArrowRight, BookOpen, Loader2, Volume2, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import { readablePronunciation } from "../lib/pronunciation";
+import type { Pronunciation } from "../types";
 export function Spinner({ label = "Loading your words…" }: { label?: string }) {
   return (
     <div className="loading" role="status">
@@ -151,10 +153,42 @@ export function Pronounce({
   audio?: string | null;
 }) {
   const [error, setError] = useState("");
+  const [rate, setRate] = useState(() => {
+    try {
+      const saved = Number(localStorage.getItem("lexi:pronunciation-rate"));
+      return [0.7, 1, 1.3].includes(saved) ? saved : 1;
+    } catch {
+      return 1;
+    }
+  });
+  const playerRef = useRef<HTMLAudioElement | null>(null);
+  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+  useEffect(
+    () => () => {
+      playerRef.current?.pause();
+      if (utteranceRef.current && "speechSynthesis" in window)
+        window.speechSynthesis.cancel();
+    },
+    [],
+  );
+  function changeRate(value: number) {
+    setRate(value);
+    if (playerRef.current) playerRef.current.playbackRate = value;
+    try {
+      localStorage.setItem("lexi:pronunciation-rate", String(value));
+    } catch {
+      /* Playback still works without storage. */
+    }
+  }
   function speak() {
     setError("");
+    playerRef.current?.pause();
+    if ("speechSynthesis" in window) window.speechSynthesis.cancel();
     if (audio) {
       const player = new Audio(audio);
+      playerRef.current = player;
+      player.playbackRate = rate;
+      player.preservesPitch = true;
       player.play().catch(() => fallback());
     } else fallback();
   }
@@ -162,21 +196,66 @@ export function Pronounce({
     if ("speechSynthesis" in window) {
       const utterance = new SpeechSynthesisUtterance(word);
       utterance.lang = "en-GB";
-      utterance.rate = 0.85;
+      utterance.rate = rate;
+      utteranceRef.current = utterance;
+      utterance.onend = () => {
+        utteranceRef.current = null;
+      };
+      utterance.onerror = (event) => {
+        utteranceRef.current = null;
+        if (event.error !== "canceled" && event.error !== "interrupted")
+          setError("Audio is unavailable. Please try again.");
+      };
       window.speechSynthesis.cancel();
       window.speechSynthesis.speak(utterance);
     } else setError("Audio is unavailable in this browser.");
   }
   return (
-    <>
+    <span className="pronunciation-controls">
       <button
+        type="button"
         className="icon-button pronunciation"
         aria-label={`Hear ${word}`}
         onClick={speak}
       >
         <Volume2 size={22} />
       </button>
+      <select
+        aria-label={`Pronunciation speed for ${word}`}
+        value={rate}
+        onChange={(event) => changeRate(Number(event.target.value))}
+      >
+        <option value={0.7}>Slow</option>
+        <option value={1}>Normal</option>
+        <option value={1.3}>Fast</option>
+      </select>
       {error && <small role="status">{error}</small>}
-    </>
+    </span>
+  );
+}
+
+export function PronunciationText({
+  pronunciations,
+}: {
+  pronunciations: Pronunciation[];
+}) {
+  const pronunciation = pronunciations.find((p) => p.ipa.trim());
+  if (!pronunciation)
+    return (
+      <span className="phonetic-guide">
+        Phonetic transcription unavailable · Tap Hear to listen
+      </span>
+    );
+  const readable = readablePronunciation(pronunciation.ipa);
+  return (
+    <span className="phonetic-guide">
+      <span className="phonetic-ipa">{pronunciation.ipa}</span>
+      {readable && (
+        <span className="phonetic-readable">
+          <strong>{readable}</strong>
+          <small>Approximate · Capitals mark stress</small>
+        </span>
+      )}
+    </span>
   );
 }

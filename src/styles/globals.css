@@ -29,7 +29,7 @@
   margin-bottom: 22px;
 }
 .understood-banner p {
-  font-size: 12px;
+  font-size: 14px;
   color: #8b7ca6;
 }
 @media (max-width: 700px) {
@@ -90,28 +90,28 @@ h3 {
   font-family: "Manrope", sans-serif;
 }
 h1 {
-  font-size: 34px;
+  font-size: 36px;
   line-height: 1.3;
   letter-spacing: -1.3px;
   font-weight: 800;
 }
 h2 {
-  font-size: 21px;
+  font-size: 23px;
   line-height: 1.45;
   letter-spacing: -0.6px;
   font-weight: 750;
 }
 h3 {
-  font-size: 17px;
+  font-size: 19px;
   line-height: 1.45;
   letter-spacing: -0.35px;
 }
 p {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.75;
 }
 small {
-  font-size: 11px;
+  font-size: 14px;
 }
 blockquote {
   margin: 18px 0;
@@ -119,7 +119,7 @@ blockquote {
   background: #f5f3fc;
   border-left: 3px solid #9583ef;
   border-radius: 0 9px 9px 0;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.75;
   color: #626a8b;
 }
@@ -132,7 +132,7 @@ label {
   display: flex;
   flex-direction: column;
   gap: 9px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   margin: 19px 0;
 }
@@ -145,7 +145,7 @@ select {
   padding: 13px 15px;
   color: var(--ink);
   width: 100%;
-  font-size: 14px;
+  font-size: 16px;
   outline: none;
   transition:
     border 0.2s,
@@ -183,7 +183,7 @@ input[type="checkbox"] {
   border: 1px solid transparent;
   border-radius: 11px;
   padding: 12px 20px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 650;
   transition:
     background 0.18s,
@@ -212,7 +212,7 @@ input[type="checkbox"] {
 .button.small {
   min-height: 39px;
   padding: 9px 15px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .button.wide {
   width: 100%;
@@ -250,7 +250,7 @@ input[type="checkbox"] {
   gap: 9px;
   align-items: center;
   color: var(--coral);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   border: 0;
   padding: 0;
@@ -260,7 +260,7 @@ input[type="checkbox"] {
   color: var(--muted);
 }
 .eyebrow {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 1.6px;
   line-height: 1.6;
   font-weight: 700;
@@ -273,15 +273,15 @@ input[type="checkbox"] {
 .subtitle {
   color: var(--muted);
   margin-top: 8px;
-  font-size: 14px;
+  font-size: 16px;
 }
 .subtle {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
 }
 .tiny-note {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 14px;
   margin-top: 14px;
   line-height: 1.7;
 }
@@ -299,14 +299,14 @@ input[type="checkbox"] {
   margin: 28px 0 18px;
 }
 .section-heading h2 {
-  font-size: 19px;
+  font-size: 21px;
 }
 .panel > .section-heading:first-child {
   margin-top: 0;
 }
 .logo {
   font-family: "Manrope", sans-serif;
-  font-size: 32px;
+  font-size: 34px;
   font-weight: 800;
   letter-spacing: -1.7px;
   display: inline-flex;
@@ -350,14 +350,14 @@ input[type="checkbox"] {
   justify-content: center;
   background: #e9e5fa;
   color: #6f60bd;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   flex-shrink: 0;
 }
 .avatar.large {
   width: 64px;
   height: 64px;
-  font-size: 20px;
+  font-size: 22px;
 }
 .app-shell {
   display: flex;
@@ -383,7 +383,7 @@ input[type="checkbox"] {
   align-items: center;
 }
 .sidebar-caption {
-  font-size: 8px;
+  font-size: 12px;
   letter-spacing: 1.25px;
   color: #a0a3b9;
   padding: 11px 16px 31px;
@@ -397,7 +397,7 @@ input[type="checkbox"] {
   display: flex;
   align-items: center;
   gap: 13px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 550;
   color: #83879d;
   padding: 13px 15px;
@@ -425,7 +425,7 @@ input[type="checkbox"] {
   background: white;
   border: 1px solid #dfd8f4;
   border-radius: 5px;
-  font-size: 8px;
+  font-size: 12px;
   padding: 2px 5px;
   font-weight: 700;
 }
@@ -438,15 +438,15 @@ input[type="checkbox"] {
   overflow: hidden;
 }
 .tiny-star {
-  font-size: 25px;
+  font-size: 27px;
   color: #9382da;
 }
 .sidebar-note h3 {
-  font-size: 16px;
+  font-size: 18px;
   margin-top: 8px;
 }
 .sidebar-note p {
-  font-size: 11px;
+  font-size: 14px;
   color: var(--muted);
   margin-top: 9px;
 }
@@ -456,14 +456,14 @@ input[type="checkbox"] {
   gap: 4px;
   color: #8777c8;
   margin-top: 15px;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
 }
 .sidebar-bottom {
   margin-top: auto;
 }
 .sidebar-bottom .nav-item {
-  font-size: 11px;
+  font-size: 14px;
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -476,7 +476,7 @@ input[type="checkbox"] {
   padding: 20px 10px 0;
 }
 .sidebar-user strong {
-  font-size: 11px;
+  font-size: 14px;
   display: block;
   max-width: 135px;
   overflow: hidden;
@@ -484,7 +484,7 @@ input[type="checkbox"] {
   white-space: nowrap;
 }
 .sidebar-user small {
-  font-size: 9px;
+  font-size: 12px;
   color: #a0a3b9;
   display: block;
   margin-top: 4px;
@@ -515,13 +515,13 @@ input[type="checkbox"] {
   background: transparent;
   border: 0;
   padding: 10px 0;
-  font-size: 12px;
+  font-size: 14px;
 }
 .global-search input:focus {
   box-shadow: none;
 }
 .global-search kbd {
-  font-size: 12px;
+  font-size: 14px;
   font-family: inherit;
   background: white;
   border: 1px solid #e9e7f0;
@@ -534,7 +534,7 @@ input[type="checkbox"] {
   gap: 22px;
 }
 .date-label {
-  font-size: 11px;
+  font-size: 14px;
   color: #9699af;
 }
 .mobile-brand {
@@ -550,7 +550,7 @@ main {
   display: flex;
   justify-content: space-between;
   padding: 23px 44px;
-  font-size: 10px;
+  font-size: 12px;
   color: #a1a3b7;
   max-width: 1340px;
   margin: auto;
@@ -574,7 +574,7 @@ main {
   margin-bottom: 12px;
 }
 .page-heading h1 {
-  font-size: 31px;
+  font-size: 33px;
 }
 .dashboard-greeting {
   display: flex;
@@ -583,22 +583,22 @@ main {
   margin: 5px 0 29px;
 }
 .dashboard-greeting .eyebrow {
-  font-size: 9px;
+  font-size: 12px;
   margin-bottom: 14px;
 }
 .dashboard-greeting h1 {
-  font-size: 31px;
+  font-size: 33px;
 }
 .greeting-spark {
   color: var(--coral);
-  font-size: 34px;
+  font-size: 36px;
   margin-left: 13px;
   font-weight: 400;
   display: inline-block;
   transform: rotate(-10deg);
 }
 .greeting-date {
-  font-size: 11px;
+  font-size: 14px;
   color: #83879e;
   text-align: right;
   line-height: 1.8;
@@ -606,7 +606,7 @@ main {
 .greeting-date span {
   display: block;
   color: #adb0c0;
-  font-size: 10px;
+  font-size: 12px;
 }
 .dashboard-grid {
   display: grid;
@@ -628,11 +628,11 @@ main {
   z-index: 1;
 }
 .daily-review-card .eyebrow {
-  font-size: 9px;
+  font-size: 12px;
   margin-bottom: 17px;
 }
 .daily-review-card h2 {
-  font-size: 23px;
+  font-size: 25px;
   line-height: 1.3;
   letter-spacing: -0.5px;
   display: flex;
@@ -646,7 +646,7 @@ main {
 }
 .daily-review-card p:not(.eyebrow) {
   color: #7f7b9d;
-  font-size: 12px;
+  font-size: 14px;
   max-width: 275px;
   margin: 16px 0 20px;
 }
@@ -660,7 +660,7 @@ main {
   gap: 7px;
   align-items: center;
   color: #9690b2;
-  font-size: 9px;
+  font-size: 12px;
   margin-top: 13px;
 }
 .review-illustration {
@@ -686,7 +686,7 @@ main {
   left: 44px;
   top: 17px;
   color: #8d7ac5;
-  font-size: 11px;
+  font-size: 14px;
 }
 .card-back i {
   display: block;
@@ -705,12 +705,12 @@ main {
   color: #8271c8;
 }
 .mini-label {
-  font-size: 6px;
+  font-size: 12px;
   letter-spacing: 0.8px;
   white-space: nowrap;
 }
 .card-front > span:last-of-type {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: -0.3px;
 }
@@ -724,7 +724,7 @@ main {
   border: 4px solid #eae6fc;
   color: white;
   border-radius: 50%;
-  font-size: 19px;
+  font-size: 21px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -736,12 +736,12 @@ main {
 .star-a {
   top: 9px;
   right: 2px;
-  font-size: 32px;
+  font-size: 34px;
 }
 .star-b {
   bottom: 2px;
   left: 4px;
-  font-size: 34px;
+  font-size: 36px;
 }
 .art-dot {
   position: absolute;
@@ -782,25 +782,25 @@ main {
   color: #c9bcf4;
 }
 .tutor-promo .eyebrow {
-  font-size: 8px;
+  font-size: 12px;
   letter-spacing: 1.15px;
   color: #a49cc5;
   margin: 16px 0 8px;
 }
 .tutor-promo h2 {
-  font-size: 23px;
+  font-size: 25px;
   line-height: 1.4;
   color: #f4f1ff;
 }
 .tutor-promo > p:not(.eyebrow) {
-  font-size: 11px;
+  font-size: 14px;
   line-height: 1.8;
   color: #aaadc6;
   margin: 10px 0 16px;
   max-width: 224px;
 }
 .tutor-promo .button {
-  font-size: 10px;
+  font-size: 12px;
   padding: 10px 13px;
   min-height: 37px;
   gap: 13px;
@@ -808,7 +808,7 @@ main {
   z-index: 1;
 }
 .tutor-promo-link {
-  font-size: 8px;
+  font-size: 12px;
   display: flex;
   gap: 7px;
   align-items: center;
@@ -859,19 +859,19 @@ main {
 }
 .stat-item strong {
   font-family: "Manrope";
-  font-size: 25px;
+  font-size: 27px;
   font-weight: 800;
   display: block;
   line-height: 1.2;
 }
 .stat-item strong small {
   font-family: "DM Sans";
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 400;
   color: var(--muted);
 }
 .stat-item div > span {
-  font-size: 10px;
+  font-size: 12px;
   color: #9599ae;
   margin-top: 7px;
   display: block;
@@ -882,7 +882,7 @@ main {
   align-items: center;
   justify-content: flex-end;
   color: #9692ac;
-  font-size: 10px;
+  font-size: 12px;
 }
 .word-grid {
   display: grid;
@@ -913,14 +913,14 @@ main {
   gap: 6px;
 }
 .word-pos {
-  font-size: 8px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1.25px;
   color: #9690b2;
   font-weight: 650;
 }
 .status-tag {
-  font-size: 8px;
+  font-size: 12px;
   border-radius: 5px;
   background: #f0ecfb;
   color: #9381c8;
@@ -945,7 +945,7 @@ main {
   align-items: center;
   justify-content: space-between;
   margin: 18px 0 8px;
-  font-size: 20px;
+  font-size: 22px;
   overflow-wrap: anywhere;
 }
 .word-card h3 svg {
@@ -953,7 +953,7 @@ main {
   flex-shrink: 0;
 }
 .word-card p {
-  font-size: 12px;
+  font-size: 14px;
   color: #8c90a8;
   line-height: 1.7;
   min-height: 42px;
@@ -963,7 +963,7 @@ main {
   overflow: hidden;
 }
 .word-card.compact h3 {
-  font-size: 18px;
+  font-size: 20px;
   margin-top: 16px;
 }
 .word-card.compact p {
@@ -976,7 +976,7 @@ main {
   border-top: 1px solid var(--line);
   margin-top: 18px;
   padding-top: 17px;
-  font-size: 8px;
+  font-size: 12px;
   color: #9798ad;
 }
 .word-card-footer > span:first-child {
@@ -1012,21 +1012,21 @@ main {
   padding: 25px 29px;
 }
 .challenge-card .eyebrow {
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 1.2px;
 }
 .challenge-card h2 {
-  font-size: 22px;
+  font-size: 24px;
   margin: 15px 0 9px;
 }
 .challenge-card p:not(.eyebrow) {
   max-width: 330px;
-  font-size: 11px;
+  font-size: 14px;
   color: #8f92a8;
   margin-bottom: 18px;
 }
 .challenge-card .text-link {
-  font-size: 11px;
+  font-size: 14px;
 }
 .learning-note {
   position: relative;
@@ -1050,7 +1050,7 @@ main {
   margin: 18px 0 13px;
   padding: 0;
   font-family: "Manrope";
-  font-size: 20px;
+  font-size: 22px;
   line-height: 1.6;
   font-weight: 600;
   color: #7d739c;
@@ -1061,7 +1061,7 @@ main {
   color: #8570c0;
 }
 .learning-note p {
-  font-size: 7px;
+  font-size: 12px;
   letter-spacing: 1.5px;
   color: #a99fbd;
 }
@@ -1079,7 +1079,7 @@ main {
   gap: 12px;
   min-height: 230px;
   color: #8c80bd;
-  font-size: 13px;
+  font-size: 15px;
 }
 .spin {
   animation: spin 1s linear infinite;
@@ -1107,10 +1107,10 @@ main {
   margin: 0 auto 18px;
 }
 .empty-state h3 {
-  font-size: 21px;
+  font-size: 23px;
 }
 .empty-state p {
-  font-size: 13px;
+  font-size: 15px;
   color: #9698ad;
   margin: 12px 0 22px;
 }
@@ -1121,7 +1121,7 @@ main {
   gap: 9px;
   border-radius: 10px;
   padding: 13px 15px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.7;
   margin: 15px 0;
   background: #fff0f2;
@@ -1144,7 +1144,7 @@ main {
   justify-content: center;
   gap: 8px;
   padding: 10px 20px;
-  font-size: 12px;
+  font-size: 14px;
   background: #eeebfb;
   color: #7f71ad;
 }
@@ -1169,7 +1169,7 @@ main {
   margin-bottom: 24px;
 }
 .collection-banner p {
-  font-size: 12px;
+  font-size: 14px;
   color: #9a90b2;
 }
 .collection-banner strong {
@@ -1177,7 +1177,7 @@ main {
   margin-right: 6px;
 }
 .collection-banner > span {
-  font-size: 28px;
+  font-size: 30px;
   margin-left: auto;
   color: #c0b2e4;
 }
@@ -1220,7 +1220,7 @@ main {
 }
 .sort-control select {
   border: 0;
-  font-size: 11px;
+  font-size: 14px;
   width: 180px;
   box-shadow: none;
   padding-left: 0;
@@ -1239,10 +1239,10 @@ main {
   color: #8d8da6;
   border: 1px solid #e3e0ec;
   border-radius: 9px;
-  font-size: 11px;
+  font-size: 14px;
 }
 .filter-pill span {
-  font-size: 9px;
+  font-size: 12px;
   background: #efedf5;
   border-radius: 4px;
   padding: 2px 5px;
@@ -1258,14 +1258,14 @@ main {
 }
 .results-label {
   color: #a0a0b3;
-  font-size: 10px;
+  font-size: 12px;
   margin: 24px 0 17px;
 }
 .back-link {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  font-size: 11px;
+  font-size: 14px;
   color: #9a94af;
   margin: 0 0 26px;
 }
@@ -1276,7 +1276,11 @@ main {
   gap: 20px;
   margin-bottom: 29px;
 }
-.word-title-row{display:flex;align-items:center;gap:17px}
+.word-title-row {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+}
 .word-detail-heading h1 {
   display: flex;
   align-items: center;
@@ -1288,12 +1292,51 @@ main {
 .pronunciation {
   color: var(--coral);
 }
+.pronunciation-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 15px;
+}
+.pronunciation-controls select {
+  width: auto;
+  margin: 0;
+  padding: 7px 10px;
+  min-height: 36px;
+  font-size: 15px;
+}
+.phonetic-guide {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 16px;
+  color: var(--muted);
+  margin: 5px 0;
+}
+.phonetic-ipa {
+  font-family: system-ui, sans-serif;
+}
+.phonetic-readable {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: baseline;
+}
+.phonetic-readable strong {
+  color: var(--purple);
+  letter-spacing: 0.04em;
+}
+.phonetic-readable small {
+  font-size: 14px;
+}
 .pronunciation-line {
   display: flex;
   gap: 17px;
   align-items: center;
   color: #9590ad;
-  font-size: 13px;
+  font-size: 15px;
+  flex-wrap: wrap;
 }
 .detail-grid {
   display: grid;
@@ -1315,16 +1358,16 @@ main {
   margin-bottom: 14px;
 }
 .sense-tags {
-  font-size: 10px;
+  font-size: 12px;
   color: #a39ab8;
 }
 .sense h3 {
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 650;
   line-height: 1.65;
 }
 .sense > p {
-  font-size: 13px;
+  font-size: 15px;
   color: #8e88a0;
   margin-top: 12px;
 }
@@ -1340,7 +1383,7 @@ main {
   margin-top: 3px;
 }
 .usage-note p {
-  font-size: 12px;
+  font-size: 14px;
   color: #9288a6;
 }
 .soft-tag {
@@ -1349,7 +1392,7 @@ main {
   color: #9688b4;
   border-radius: 6px;
   padding: 6px 10px;
-  font-size: 10px;
+  font-size: 12px;
 }
 .phrase-list,
 .synonyms {
@@ -1361,17 +1404,17 @@ main {
 }
 .phrase-list .eyebrow {
   width: 100%;
-  font-size: 8px;
+  font-size: 12px;
   margin-bottom: 3px;
 }
 .synonyms > span:first-child {
-  font-size: 10px;
+  font-size: 12px;
   color: #a4a0b3;
   margin-right: 5px;
 }
 .source-credit {
   color: #b0a9bf;
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.7;
   margin-top: 21px;
 }
@@ -1380,7 +1423,7 @@ main {
 }
 .source-credit small {
   display: block;
-  font-size: 8px;
+  font-size: 12px;
   margin-top: 3px;
   overflow-wrap: anywhere;
 }
@@ -1388,7 +1431,7 @@ main {
   margin-top: 22px;
 }
 .note-panel h2 {
-  font-size: 17px;
+  font-size: 19px;
   margin: 9px 0 17px;
 }
 .note-panel .button {
@@ -1398,7 +1441,7 @@ main {
   margin-bottom: 20px;
 }
 .detail-aside h2 {
-  font-size: 19px;
+  font-size: 21px;
   margin: 12px 0 24px;
 }
 .meter {
@@ -1408,13 +1451,13 @@ main {
   display: flex;
   justify-content: space-between;
   gap: 15px;
-  font-size: 12px;
+  font-size: 14px;
   margin-bottom: 10px;
 }
 .meter strong {
   color: var(--coral);
   font-weight: 550;
-  font-size: 10px;
+  font-size: 12px;
 }
 .meter-track {
   height: 6px;
@@ -1438,12 +1481,12 @@ main {
   color: #b0a2cb;
 }
 .next-review span {
-  font-size: 10px;
+  font-size: 12px;
   color: #a59ab7;
 }
 .next-review strong {
   display: block;
-  font-size: 13px;
+  font-size: 15px;
   color: #817197;
   margin-top: 5px;
 }
@@ -1452,7 +1495,7 @@ main {
 }
 .encounter-panel > p:last-child {
   color: #a39aaf;
-  font-size: 11px;
+  font-size: 14px;
   margin-top: 11px;
 }
 .word-actions {
@@ -1481,13 +1524,13 @@ main {
   justify-content: space-between;
 }
 .modal-heading h2 {
-  font-size: 21px;
+  font-size: 23px;
 }
 .modal > .subtitle {
-  font-size: 12px;
+  font-size: 14px;
 }
 .optional {
-  font-size: 10px;
+  font-size: 12px;
   color: #a79fb8;
   font-weight: 400;
 }
@@ -1503,21 +1546,21 @@ main {
   margin-bottom: 17px;
 }
 .preview-title h3 {
-  font-size: 26px;
+  font-size: 28px;
 }
 .preview-sense {
   margin-top: 17px;
 }
 .preview-sense .eyebrow {
-  font-size: 8px;
+  font-size: 12px;
 }
 .preview-sense p {
   margin-top: 8px;
-  font-size: 13px;
+  font-size: 15px;
   color: #888098;
 }
 .preview-sense blockquote {
-  font-size: 12px;
+  font-size: 14px;
 }
 .entry-preview > small {
   color: #9e94ae;
@@ -1542,7 +1585,7 @@ main {
   color: white;
   padding: 12px 17px;
   border-radius: 12px;
-  font-size: 12px;
+  font-size: 14px;
   box-shadow: 0 12px 45px #1c23442c;
   z-index: 100;
   max-width: calc(100vw - 32px);
@@ -1564,13 +1607,13 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 9px;
+  font-size: 12px;
   color: #9285ad;
   letter-spacing: 1.3px;
   margin-bottom: 13px;
 }
 .review-session-header > span:last-child {
-  font-size: 13px;
+  font-size: 15px;
   letter-spacing: 0;
   color: #837397;
 }
@@ -1603,15 +1646,15 @@ main {
   margin-bottom: 21px;
 }
 .question-card > .eyebrow {
-  font-size: 9px;
+  font-size: 12px;
   margin-bottom: 14px;
 }
 .question-card h2 {
-  font-size: 27px;
+  font-size: 29px;
   line-height: 1.55;
 }
 .question-hint {
-  font-size: 12px;
+  font-size: 14px;
   color: #a294b1;
   margin-top: 14px;
 }
@@ -1619,7 +1662,7 @@ main {
   margin-top: 29px;
   color: #9c90ad;
   font-weight: 400;
-  font-size: 11px;
+  font-size: 14px;
 }
 .answer-choices {
   margin-top: 27px;
@@ -1637,7 +1680,7 @@ main {
   border: 1px solid #e7e1f0;
   border-radius: 11px;
   background: white;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.6;
   color: #8d819f;
 }
@@ -1649,7 +1692,7 @@ main {
   height: 26px;
   background: #f5f1fb;
   border-radius: 6px;
-  font-size: 10px;
+  font-size: 12px;
   color: #ad9dbc;
   flex-shrink: 0;
 }
@@ -1674,7 +1717,7 @@ main {
   margin-top: 26px;
 }
 .review-controls .text-link {
-  font-size: 11px;
+  font-size: 14px;
 }
 .review-main > .back-link {
   margin-top: 23px;
@@ -1687,15 +1730,15 @@ main {
   margin-bottom: 26px;
 }
 .review-tip .eyebrow {
-  font-size: 8px;
+  font-size: 12px;
   margin-bottom: 17px;
 }
 .review-tip h3 {
-  font-size: 23px;
+  font-size: 25px;
   line-height: 1.55;
 }
 .review-tip p:not(.eyebrow) {
-  font-size: 12px;
+  font-size: 14px;
   color: #a196ad;
   margin-top: 17px;
 }
@@ -1726,10 +1769,10 @@ main {
   color: #c28365;
 }
 .review-feedback h3 {
-  font-size: 15px;
+  font-size: 17px;
 }
 .review-feedback p {
-  font-size: 12px;
+  font-size: 14px;
   color: #788a7e;
   margin: 13px 0;
 }
@@ -1751,7 +1794,7 @@ main {
 }
 .review-feedback blockquote {
   background: #ffffff80;
-  font-size: 11px;
+  font-size: 14px;
 }
 .review-feedback .button {
   width: 100%;
@@ -1791,7 +1834,7 @@ main {
   margin-bottom: 17px;
 }
 .review-complete h2 {
-  font-size: 34px;
+  font-size: 36px;
   line-height: 1.5;
 }
 .review-complete > p:not(.eyebrow) {
@@ -1806,11 +1849,11 @@ main {
 }
 .completion-stats strong {
   font-family: "Manrope";
-  font-size: 30px;
+  font-size: 32px;
   display: block;
 }
 .completion-stats span {
-  font-size: 11px;
+  font-size: 14px;
   color: #a49aae;
   display: block;
   margin-top: 7px;
@@ -1835,7 +1878,7 @@ main {
   margin-bottom: 16px;
 }
 .meaning-search-panel h2 {
-  font-size: 28px;
+  font-size: 30px;
   line-height: 1.45;
   margin-bottom: 27px;
 }
@@ -1854,18 +1897,18 @@ main {
 .meaning-input input {
   border: 0;
   padding: 9px 0;
-  font-size: 13px;
+  font-size: 15px;
   box-shadow: none;
 }
 .meaning-input .button {
-  font-size: 11px;
+  font-size: 14px;
 }
 .checkbox-label {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 400;
   color: #9b87b5;
   margin-top: 16px;
@@ -1880,7 +1923,7 @@ main {
 }
 .search-ideas > span {
   width: 100%;
-  font-size: 9px;
+  font-size: 12px;
   color: #ac99be;
   margin-bottom: 5px;
 }
@@ -1891,7 +1934,7 @@ main {
   border: 1px solid #dcd1ef;
   background: #ffffff38;
   color: #9b83b4;
-  font-size: 9px;
+  font-size: 12px;
   border-radius: 7px;
   padding: 8px 10px;
 }
@@ -1912,7 +1955,7 @@ main {
 }
 .search-explanation p {
   color: #8a7d9b;
-  font-size: 13px;
+  font-size: 15px;
   white-space: pre-wrap;
 }
 .search-results {
@@ -1928,7 +1971,7 @@ main {
 }
 .result-number {
   font-family: "Manrope";
-  font-size: 27px;
+  font-size: 29px;
   color: #d5c8e5;
   flex-shrink: 0;
 }
@@ -1936,11 +1979,11 @@ main {
   flex: 1;
 }
 .search-result h3 {
-  font-size: 22px;
+  font-size: 24px;
   margin: 5px 0 9px;
 }
 .search-result p {
-  font-size: 13px;
+  font-size: 15px;
   color: #95869f;
 }
 .search-result > .icon-button {
@@ -1951,7 +1994,7 @@ main {
   align-items: center;
   gap: 6px;
   margin-top: 10px;
-  font-size: 9px;
+  font-size: 12px;
   color: #70a08a;
 }
 .subtle-note {
@@ -1959,7 +2002,7 @@ main {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-size: 11px;
+  font-size: 14px;
   color: #b4a5c3;
   margin: 40px 0;
 }
@@ -1972,11 +2015,11 @@ main {
   }
   .mobile-conversation-picker label {
     margin: 0;
-    font-size: 10px;
+    font-size: 12px;
     color: #9982b0;
   }
   .mobile-conversation-picker select {
-    font-size: 11px;
+    font-size: 14px;
     padding: 11px;
   }
 }
@@ -2013,11 +2056,11 @@ main {
 }
 .chat-header strong {
   display: block;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 650;
 }
 .chat-header div > span {
-  font-size: 9px;
+  font-size: 12px;
   color: #a9a0b8;
   margin-top: 5px;
   display: block;
@@ -2027,7 +2070,7 @@ main {
   align-items: center;
   gap: 6px;
   margin-left: auto;
-  font-size: 8px;
+  font-size: 12px;
   color: #9e97ab;
   white-space: nowrap;
 }
@@ -2048,12 +2091,12 @@ main {
   margin-bottom: 16px;
 }
 .chat-welcome h2 {
-  font-size: 26px;
+  font-size: 28px;
   line-height: 1.5;
 }
 .chat-welcome > p {
   max-width: 380px;
-  font-size: 12px;
+  font-size: 14px;
   color: #a295b0;
   margin: 18px auto 25px;
 }
@@ -2072,7 +2115,7 @@ main {
   border-radius: 12px;
 }
 .prompt-grid > button > span {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 650;
   color: #8c709e;
   display: block;
@@ -2085,7 +2128,7 @@ main {
   color: #b69ac7;
 }
 .prompt-grid p {
-  font-size: 10px;
+  font-size: 12px;
   color: #b39fc0;
   line-height: 1.6;
   margin-top: 9px;
@@ -2102,7 +2145,7 @@ main {
 .chat-composer textarea {
   resize: none;
   min-height: 46px;
-  font-size: 12px;
+  font-size: 14px;
   border: 0;
   box-shadow: none;
   padding: 7px 0;
@@ -2114,7 +2157,7 @@ main {
 }
 .chat-footnote {
   text-align: center;
-  font-size: 8px;
+  font-size: 12px;
   color: #b8a9c3;
   margin: 0 17px 17px;
   line-height: 1.6;
@@ -2136,7 +2179,7 @@ main {
   padding: 16px 18px;
   background: #f7f3fb;
   border-radius: 0 13px 13px 13px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.9;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
@@ -2170,7 +2213,7 @@ main {
   gap: 5px;
   border: 1px solid #e5d9ee;
   color: #b39ac3;
-  font-size: 9px;
+  font-size: 12px;
   padding: 6px 9px;
   background: white;
   border-radius: 7px;
@@ -2182,10 +2225,10 @@ main {
   margin-top: 12px;
 }
 .tutor-exercise .eyebrow {
-  font-size: 8px;
+  font-size: 12px;
 }
 .tutor-exercise p:not(.eyebrow) {
-  font-size: 12px;
+  font-size: 14px;
   color: #a087b0;
   margin: 7px 0 10px;
 }
@@ -2211,7 +2254,7 @@ main {
 .thinking small {
   margin-left: 7px;
   color: #b39dc2;
-  font-size: 9px;
+  font-size: 12px;
 }
 @keyframes think {
   50% {
@@ -2221,10 +2264,10 @@ main {
 }
 .conversations .button {
   margin-bottom: 29px;
-  font-size: 11px;
+  font-size: 14px;
 }
 .conversations > .eyebrow {
-  font-size: 8px;
+  font-size: 12px;
   margin-bottom: 17px;
 }
 .conversation-item {
@@ -2238,7 +2281,7 @@ main {
   color: #a494b1;
   border-radius: 9px;
   padding: 13px 12px;
-  font-size: 10px;
+  font-size: 12px;
 }
 .conversation-item.selected {
   background: #eee7f8;
@@ -2259,11 +2302,11 @@ main {
   color: #b09ac7;
 }
 .tutor-context-note h3 {
-  font-size: 15px;
+  font-size: 17px;
   margin: 13px 0 9px;
 }
 .tutor-context-note p {
-  font-size: 11px;
+  font-size: 14px;
   color: #b6a4bf;
 }
 .progress-stats {
@@ -2278,16 +2321,16 @@ main {
 .progress-stat > strong {
   display: block;
   font-family: "Manrope";
-  font-size: 33px;
+  font-size: 35px;
   letter-spacing: -1px;
   margin: 18px 0 5px;
 }
 .progress-stat h3 {
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 0;
 }
 .progress-stat p {
-  font-size: 9px;
+  font-size: 12px;
   color: #a79bb3;
   margin-top: 9px;
   line-height: 1.8;
@@ -2298,10 +2341,10 @@ main {
   gap: 23px;
 }
 .progress-grid .eyebrow {
-  font-size: 8px;
+  font-size: 12px;
 }
 .progress-grid h2 {
-  font-size: 19px;
+  font-size: 21px;
   margin: 8px 0 23px;
 }
 .activity-chart {
@@ -2320,7 +2363,7 @@ main {
   min-width: 0;
 }
 .chart-day > strong {
-  font-size: 10px;
+  font-size: 12px;
   color: #b49ac6;
   font-weight: 500;
   margin-bottom: 8px;
@@ -2347,7 +2390,7 @@ main {
   background: #ae8ccd;
 }
 .chart-day > span {
-  font-size: 9px;
+  font-size: 12px;
   color: #b8a6c4;
   margin: 13px 0;
 }
@@ -2355,7 +2398,7 @@ main {
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 9px;
+  font-size: 12px;
   color: #b6a4c3;
   margin-top: 18px;
 }
@@ -2369,7 +2412,7 @@ main {
   color: #b49ac6;
 }
 .weak-panel .eyebrow {
-  font-size: 8px;
+  font-size: 12px;
   margin-bottom: 7px;
 }
 .weak-words {
@@ -2386,11 +2429,11 @@ main {
   border-bottom: 1px solid var(--line);
 }
 .weak-word strong {
-  font-size: 15px;
+  font-size: 17px;
   font-family: "Manrope";
 }
 .weak-word p {
-  font-size: 10px;
+  font-size: 12px;
   color: #b09fc0;
   margin-top: 6px;
 }
@@ -2410,10 +2453,10 @@ main {
   margin-bottom: 24px;
 }
 .settings-title h2 {
-  font-size: 18px;
+  font-size: 20px;
 }
 .settings-title p {
-  font-size: 10px;
+  font-size: 12px;
   color: #a69ab1;
   margin-top: 3px;
 }
@@ -2427,10 +2470,10 @@ main {
   margin-bottom: 22px;
 }
 .profile-preview strong {
-  font-size: 14px;
+  font-size: 16px;
 }
 .profile-preview p {
-  font-size: 11px;
+  font-size: 14px;
   color: #ae9dbc;
   margin-top: 4px;
   overflow-wrap: anywhere;
@@ -2446,11 +2489,11 @@ main {
 }
 .setting-toggle strong,
 .push-setting strong {
-  font-size: 12px;
+  font-size: 14px;
 }
 .setting-toggle p,
 .push-setting p {
-  font-size: 10px;
+  font-size: 12px;
   color: #b09dbd;
   margin-top: 5px;
 }
@@ -2485,15 +2528,15 @@ main {
 }
 .settings-form-grid label {
   margin: 0 0 21px;
-  font-size: 11px;
+  font-size: 14px;
   color: #a08cac;
 }
 .settings-form-grid select,
 .settings-form-grid input {
-  font-size: 12px;
+  font-size: 14px;
 }
 .settings-section > .eyebrow {
-  font-size: 8px;
+  font-size: 12px;
   margin: 4px 0 21px;
 }
 .push-setting {
@@ -2505,27 +2548,27 @@ main {
   padding-top: 19px;
 }
 .push-setting .button {
-  font-size: 10px;
+  font-size: 12px;
 }
 .settings-grid > aside .settings-section h2 {
   margin: 17px 0;
-  font-size: 22px;
+  font-size: 24px;
 }
 .settings-grid > aside .settings-section > p {
-  font-size: 12px;
+  font-size: 14px;
   color: #af9abc;
   line-height: 1.9;
   margin-bottom: 22px;
 }
 .settings-grid > aside .button {
-  font-size: 11px;
+  font-size: 14px;
   margin-top: 12px;
 }
 .offline-status {
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 10px;
+  font-size: 12px;
   color: #a593b2;
   padding: 15px 0;
   border-top: 1px solid var(--line);
@@ -2533,23 +2576,23 @@ main {
 }
 .offline-status > span:last-child {
   margin-left: auto;
-  font-size: 8px;
+  font-size: 12px;
 }
 .privacy-note {
   padding: 18px 22px;
   color: #b9a3c8;
 }
 .privacy-note h3 {
-  font-size: 14px;
+  font-size: 16px;
   margin: 13px 0 10px;
 }
 .privacy-note p {
-  font-size: 11px;
+  font-size: 14px;
   color: #b5a2c1;
   line-height: 1.9;
 }
 .version-note {
-  font-size: 9px;
+  font-size: 12px;
   color: #c1b2ca;
   text-align: center;
   margin-top: 38px;
@@ -2577,7 +2620,7 @@ main {
   padding-top: 50px;
 }
 .auth-story-content > .eyebrow {
-  font-size: 8px;
+  font-size: 12px;
   color: #b1a7cb;
   margin-bottom: 20px;
   letter-spacing: 1.6px;
@@ -2593,7 +2636,7 @@ main {
 }
 .auth-intro {
   color: #b5b5ce;
-  font-size: 13px;
+  font-size: 15px;
   margin-top: 22px;
   line-height: 1.9;
 }
@@ -2617,14 +2660,14 @@ main {
   box-shadow: 0 15px 35px #11152f3b;
 }
 .illustration-card .eyebrow {
-  font-size: 6px;
+  font-size: 12px;
   letter-spacing: 1px;
   color: #a18bb8;
   margin-bottom: 16px;
 }
 .illustration-word {
   font-family: "Manrope";
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
   letter-spacing: -1px;
   display: flex;
@@ -2634,17 +2677,17 @@ main {
 }
 .illustration-word > span {
   color: var(--coral);
-  font-size: 25px;
+  font-size: 27px;
 }
 .ipa {
-  font-size: 10px;
+  font-size: 12px;
   color: #a599b3;
   display: block;
   margin-top: 7px;
 }
 .illustration-card p {
   color: #8f829f;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.9;
   margin: 17px 0;
 }
@@ -2652,7 +2695,7 @@ main {
   background: #f3edf9;
   border-left: 2px solid #ab93d0;
   padding: 11px;
-  font-size: 10px;
+  font-size: 12px;
   color: #9f87b2;
   border-radius: 0 7px 7px 0;
 }
@@ -2669,13 +2712,13 @@ main {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 8px;
+  font-size: 12px;
   color: #8d9e8f;
 }
 .floating-note {
   position: absolute;
   z-index: 3;
-  font-size: 9px;
+  font-size: 12px;
   white-space: nowrap;
   background: #4b4169;
   border: 1px solid #66577f;
@@ -2695,7 +2738,7 @@ main {
   transform: rotate(5deg);
   background: #36314f;
   border-color: #4b4165;
-  font-size: 8px;
+  font-size: 12px;
 }
 .illustration-orbit {
   position: absolute;
@@ -2725,13 +2768,13 @@ main {
   color: #aaa0ca;
 }
 .auth-benefits span {
-  font-size: 9px;
+  font-size: 12px;
   color: #a8a6c3;
   line-height: 1.7;
   max-width: 105px;
 }
 .story-footer {
-  font-size: 9px;
+  font-size: 12px;
   color: #767994;
   border-top: 1px solid #353855;
   padding: 21px 0;
@@ -2745,14 +2788,14 @@ main {
 }
 .auth-top-note {
   color: #b3a5c0;
-  font-size: 8px;
+  font-size: 12px;
   letter-spacing: 1.25px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 .auth-top-note > span {
-  font-size: 18px;
+  font-size: 20px;
   color: #c4b2d4;
 }
 .auth-form-wrap,
@@ -2763,7 +2806,7 @@ main {
   padding: 50px 0;
 }
 .auth-form-wrap > .eyebrow {
-  font-size: 9px;
+  font-size: 12px;
   margin-bottom: 17px;
 }
 .auth-form-wrap h2 {
@@ -2771,16 +2814,16 @@ main {
   letter-spacing: -1.5px;
 }
 .auth-form-wrap .subtitle {
-  font-size: 12px;
+  font-size: 14px;
   margin: 13px 0 28px;
 }
 .auth-form-wrap label {
-  font-size: 11px;
+  font-size: 14px;
   color: #8f7f9d;
   margin: 19px 0;
 }
 .auth-form-wrap input {
-  font-size: 12px;
+  font-size: 14px;
   padding: 14px 15px;
 }
 .password-field {
@@ -2801,7 +2844,7 @@ main {
   background: transparent;
   color: #b296c7;
   padding: 0;
-  font-size: 10px;
+  font-size: 12px;
   margin-left: auto;
   margin-top: -4px;
   margin-bottom: 23px;
@@ -2810,10 +2853,10 @@ main {
   margin-top: 9px;
   justify-content: space-between;
   min-height: 48px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .auth-switch {
-  font-size: 11px;
+  font-size: 14px;
   color: #ae9bbe;
   text-align: center;
   margin-top: 26px;
@@ -2822,7 +2865,7 @@ main {
 .auth-switch a {
   border: 0;
   background: transparent;
-  font-size: 11px;
+  font-size: 14px;
   color: #9a7ac0;
   font-weight: 600;
   padding: 0 0 0 3px;
@@ -2833,19 +2876,19 @@ main {
   justify-content: center;
   gap: 7px;
   color: #bcacc8;
-  font-size: 9px;
+  font-size: 12px;
   margin-top: 38px;
   line-height: 1.7;
 }
 .auth-bottom-note {
   color: #c7b9d1;
-  font-size: 7px;
+  font-size: 12px;
   letter-spacing: 1.5px;
   text-align: center;
   padding-top: 15px;
 }
 .welcome-content > .eyebrow {
-  font-size: 8px;
+  font-size: 12px;
   margin-bottom: 17px;
 }
 .welcome-sparkle {
@@ -2863,18 +2906,18 @@ main {
   color: #ab8cc8;
 }
 .welcome-content > p:not(.eyebrow) {
-  font-size: 13px;
+  font-size: 15px;
   color: #aa94b9;
   line-height: 1.9;
   margin-top: 24px;
   margin-bottom: 29px;
 }
 .welcome-content .button {
-  font-size: 12px;
+  font-size: 14px;
   justify-content: space-between;
 }
 .welcome-content > .auth-switch {
-  font-size: 11px;
+  font-size: 14px;
   margin-top: 24px;
 }
 .skip-link {
@@ -2886,7 +2929,7 @@ main {
   color: white;
   padding: 13px;
   border-radius: 9px;
-  font-size: 13px;
+  font-size: 15px;
 }
 .skip-link:focus {
   top: 12px;
@@ -2960,7 +3003,7 @@ main {
     padding: 25px;
   }
   .daily-review-card h2 {
-    font-size: 19px;
+    font-size: 21px;
     gap: 13px;
   }
   .daily-review-card h2 > span {
@@ -2970,7 +3013,7 @@ main {
     padding: 23px;
   }
   .tutor-promo h2 {
-    font-size: 21px;
+    font-size: 23px;
   }
   .stats-strip {
     padding: 20px;
@@ -3043,12 +3086,12 @@ main {
     width: calc(100% - 185px);
   }
   .nav-item {
-    font-size: 10px;
+    font-size: 12px;
     gap: 9px;
     padding: 12px;
   }
   .sidebar-caption {
-    font-size: 6px;
+    font-size: 12px;
     padding-left: 12px;
     letter-spacing: 1px;
   }
@@ -3060,24 +3103,24 @@ main {
     margin: 27px 7px 18px;
   }
   .sidebar-note h3 {
-    font-size: 14px;
+    font-size: 16px;
   }
   .sidebar-note p {
-    font-size: 9px;
+    font-size: 12px;
   }
   .sidebar-note a {
-    font-size: 8px;
+    font-size: 12px;
   }
   .sidebar-user {
     padding-left: 6px;
     padding-right: 6px;
   }
   .sidebar-user strong {
-    font-size: 10px;
+    font-size: 12px;
     max-width: 100px;
   }
   .sidebar-user small {
-    font-size: 8px;
+    font-size: 12px;
   }
   main {
     padding: 26px;
@@ -3096,7 +3139,7 @@ main {
     gap: 14px;
   }
   .dashboard-greeting h1 {
-    font-size: 26px;
+    font-size: 28px;
   }
   .greeting-date {
     display: none;
@@ -3126,7 +3169,7 @@ main {
     grid-column: 1;
   }
   .tutor-promo h2 {
-    font-size: 21px;
+    font-size: 23px;
     grid-column: 1;
   }
   .tutor-promo h2 br {
@@ -3156,10 +3199,10 @@ main {
     height: 34px;
   }
   .stat-item strong {
-    font-size: 23px;
+    font-size: 25px;
   }
   .stat-item div > span {
-    font-size: 8px;
+    font-size: 12px;
   }
   .word-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3174,22 +3217,22 @@ main {
     padding: 24px;
   }
   .challenge-card h2 {
-    font-size: 19px;
+    font-size: 21px;
   }
   .learning-note {
     padding: 27px;
   }
   .learning-note blockquote {
-    font-size: 17px;
+    font-size: 19px;
   }
   .page-heading {
     align-items: flex-start;
   }
   .page-heading h1 {
-    font-size: 27px;
+    font-size: 29px;
   }
   .page-heading .button {
-    font-size: 11px;
+    font-size: 14px;
     padding: 10px 14px;
   }
   .detail-grid {
@@ -3249,7 +3292,7 @@ main {
     font-size: 40px;
   }
   .auth-intro {
-    font-size: 11px;
+    font-size: 14px;
   }
   .auth-story {
     padding: 30px 6%;
@@ -3262,29 +3305,29 @@ main {
     padding: 21px;
   }
   .illustration-word {
-    font-size: 21px;
+    font-size: 23px;
   }
   .floating-note.note-one {
     right: -15px;
-    font-size: 7px;
+    font-size: 12px;
   }
   .floating-note.note-two {
-    font-size: 6px;
+    font-size: 12px;
   }
   .auth-benefits {
     gap: 12px;
   }
   .auth-benefits span {
-    font-size: 8px;
+    font-size: 12px;
   }
   .auth-form-wrap h2 {
-    font-size: 30px;
+    font-size: 32px;
   }
   .welcome-content h2 {
     font-size: 42px;
   }
   .auth-top-note {
-    font-size: 6px;
+    font-size: 12px;
   }
   .word-detail-heading h1 {
     font-size: 38px;
@@ -3305,10 +3348,10 @@ main {
     display: inline-flex;
   }
   .sidebar-caption {
-    font-size: 8px;
+    font-size: 12px;
   }
   .sidebar .nav-item {
-    font-size: 12px;
+    font-size: 14px;
     gap: 14px;
     padding: 14px;
   }
@@ -3346,7 +3389,7 @@ main {
     color: #b7b3d1;
   }
   .mobile-brand .logo {
-    font-size: 27px;
+    font-size: 29px;
     letter-spacing: -1.5px;
   }
   .mobile-brand .logo span {
@@ -3362,7 +3405,7 @@ main {
   .topbar-actions .button {
     background: #ffffff12;
     border: 1px solid #ffffff26;
-    font-size: 10px;
+    font-size: 12px;
     min-height: 34px;
     padding: 8px 11px;
     color: #eae3f9;
@@ -3383,23 +3426,23 @@ main {
     color: white;
   }
   .dashboard-greeting .eyebrow {
-    font-size: 7px;
+    font-size: 12px;
     color: #a19ab9;
     margin-bottom: 13px;
     letter-spacing: 1.4px;
   }
   .dashboard-greeting h1 {
-    font-size: 27px;
+    font-size: 29px;
     letter-spacing: -1.1px;
   }
   .greeting-spark {
-    font-size: 30px;
+    font-size: 32px;
     color: #ccb6ed;
     margin-left: 9px;
   }
   .dashboard-greeting .subtitle {
     color: #b1b2c9;
-    font-size: 11px;
+    font-size: 14px;
     margin-top: 10px;
   }
   .dashboard-grid {
@@ -3411,18 +3454,18 @@ main {
     min-height: 250px;
   }
   .daily-review-card h2 {
-    font-size: 20px;
+    font-size: 22px;
     gap: 20px;
   }
   .daily-review-card h2 > span {
     font-size: 65px;
   }
   .daily-review-card p:not(.eyebrow) {
-    font-size: 11px;
+    font-size: 14px;
     margin-top: 12px;
   }
   .daily-review-card .eyebrow {
-    font-size: 9px;
+    font-size: 12px;
   }
   .daily-review-card .button {
     min-width: 220px;
@@ -3438,22 +3481,22 @@ main {
     display: block;
   }
   .tutor-promo h2 {
-    font-size: 21px;
+    font-size: 23px;
   }
   .tutor-promo > p:not(.eyebrow) {
-    font-size: 11px;
+    font-size: 14px;
     margin: 11px 0 16px;
     max-width: 270px;
   }
   .tutor-promo .eyebrow {
-    font-size: 8px;
+    font-size: 12px;
     margin-bottom: 10px;
   }
   .tutor-promo .button {
-    font-size: 10px;
+    font-size: 12px;
   }
   .tutor-promo-link {
-    font-size: 9px;
+    font-size: 12px;
     margin-top: 15px;
   }
   .stats-strip {
@@ -3477,19 +3520,19 @@ main {
     display: none;
   }
   .stat-item strong {
-    font-size: 25px;
+    font-size: 27px;
   }
   .stat-item div > span {
-    font-size: 8px;
+    font-size: 12px;
   }
   .stat-item strong small {
-    font-size: 9px;
+    font-size: 12px;
   }
   .section-heading h2 {
-    font-size: 17px;
+    font-size: 19px;
   }
   .section-heading .text-link {
-    font-size: 10px;
+    font-size: 12px;
   }
   .word-grid {
     grid-template-columns: 1fr;
@@ -3519,12 +3562,12 @@ main {
     display: none;
   }
   .recent-grid .word-card h3 {
-    font-size: 14px;
+    font-size: 16px;
     margin: 0 0 5px;
     font-weight: 600;
   }
   .recent-grid .word-card p {
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.5;
   }
   .recent-grid .word-card:hover {
@@ -3540,24 +3583,24 @@ main {
     padding: 24px;
   }
   .challenge-card h2 {
-    font-size: 22px;
+    font-size: 24px;
   }
   .challenge-card p:not(.eyebrow) {
-    font-size: 12px;
+    font-size: 14px;
   }
   .learning-note {
     padding: 29px;
   }
   .learning-note blockquote {
-    font-size: 21px;
+    font-size: 23px;
   }
   .learning-note p {
-    font-size: 8px;
+    font-size: 12px;
   }
   .app-footer {
     padding: 10px 23px 95px;
     justify-content: center;
-    font-size: 8px;
+    font-size: 12px;
   }
   .app-footer > span:last-child {
     display: none;
@@ -3582,7 +3625,7 @@ main {
     align-items: center;
     gap: 6px;
     color: #9295b3;
-    font-size: 8px;
+    font-size: 12px;
     min-width: 49px;
   }
   .mobile-bottom a svg {
@@ -3595,7 +3638,7 @@ main {
     bottom: 92px;
     right: 16px;
     left: 16px;
-    font-size: 11px;
+    font-size: 14px;
     padding: 12px;
   }
   .page-heading {
@@ -3603,33 +3646,33 @@ main {
     display: block;
   }
   .page-heading .eyebrow {
-    font-size: 8px;
+    font-size: 12px;
     margin-bottom: 12px;
   }
   .page-heading h1 {
-    font-size: 27px;
+    font-size: 29px;
     line-height: 1.4;
     max-width: 360px;
   }
   .page-heading .subtitle {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.8;
     margin-top: 12px;
   }
   .page-heading > .button {
     margin-top: 18px;
-    font-size: 12px;
+    font-size: 14px;
   }
   .collection-banner {
     padding: 17px;
     gap: 12px;
   }
   .collection-banner p {
-    font-size: 11px;
+    font-size: 14px;
   }
   .collection-banner strong {
     display: block;
-    font-size: 12px;
+    font-size: 14px;
   }
   .vocabulary-toolbar {
     flex-direction: column;
@@ -3637,7 +3680,7 @@ main {
     margin-bottom: 19px;
   }
   .vocabulary-toolbar .input-with-icon input {
-    font-size: 11px;
+    font-size: 14px;
     padding-top: 14px;
     padding-bottom: 14px;
   }
@@ -3646,7 +3689,7 @@ main {
     height: 37px;
   }
   .sort-control select {
-    font-size: 10px;
+    font-size: 12px;
     padding-top: 9px;
     padding-bottom: 9px;
   }
@@ -3654,7 +3697,7 @@ main {
     gap: 7px;
   }
   .filter-pill {
-    font-size: 10px;
+    font-size: 12px;
     padding: 8px 10px;
     gap: 5px;
   }
@@ -3665,15 +3708,15 @@ main {
     flex-wrap: nowrap;
   }
   .word-card h3 {
-    font-size: 22px;
+    font-size: 24px;
   }
   .word-card p {
     min-height: 0;
-    font-size: 12px;
+    font-size: 14px;
   }
   .word-card-footer {
     flex-wrap: nowrap;
-    font-size: 9px;
+    font-size: 12px;
   }
   .word-card-footer > span:first-child {
     width: auto;
@@ -3683,7 +3726,7 @@ main {
     margin-left: 0;
   }
   .back-link {
-    font-size: 10px;
+    font-size: 12px;
     margin-bottom: 22px;
   }
   .word-detail-heading {
@@ -3694,7 +3737,7 @@ main {
     font-size: 35px;
   }
   .word-detail-heading .eyebrow {
-    font-size: 8px;
+    font-size: 12px;
   }
   .word-detail-heading > .button {
     margin-top: 23px;
@@ -3714,7 +3757,7 @@ main {
     border-radius: 19px;
   }
   .meanings-panel h2 {
-    font-size: 17px;
+    font-size: 19px;
   }
   .meanings-panel .section-heading {
     align-items: flex-start;
@@ -3727,19 +3770,19 @@ main {
     gap: 7px;
   }
   .sense-tags {
-    font-size: 9px;
+    font-size: 12px;
   }
   .sense h3 {
-    font-size: 15px;
+    font-size: 17px;
   }
   .sense > p {
-    font-size: 12px;
+    font-size: 14px;
   }
   .sense blockquote {
-    font-size: 12px;
+    font-size: 14px;
   }
   .sense .eyebrow {
-    font-size: 8px;
+    font-size: 12px;
   }
   .word-actions {
     display: flex;
@@ -3753,39 +3796,39 @@ main {
     min-height: 390px;
   }
   .question-card h2 {
-    font-size: 23px;
+    font-size: 25px;
   }
   .question-card > .eyebrow {
-    font-size: 8px;
+    font-size: 12px;
   }
   .question-hint {
-    font-size: 11px;
+    font-size: 14px;
   }
   .answer-choice {
-    font-size: 12px;
+    font-size: 14px;
     padding: 13px;
   }
   .review-controls .button {
-    font-size: 11px;
+    font-size: 14px;
     padding: 11px 15px;
   }
   .review-complete {
     padding: 35px 24px;
   }
   .review-complete h2 {
-    font-size: 28px;
+    font-size: 30px;
   }
   .review-complete .eyebrow {
-    font-size: 8px;
+    font-size: 12px;
   }
   .review-complete > p:not(.eyebrow) {
-    font-size: 12px;
+    font-size: 14px;
   }
   .meaning-search-panel {
     padding: 27px 19px;
   }
   .meaning-search-panel h2 {
-    font-size: 24px;
+    font-size: 26px;
   }
   .meaning-input {
     flex-wrap: wrap;
@@ -3796,15 +3839,15 @@ main {
   .meaning-input input {
     width: calc(100% - 35px);
     flex: 1;
-    font-size: 11px;
+    font-size: 14px;
   }
   .meaning-input .button {
     width: 100%;
     margin-top: 7px;
-    font-size: 12px;
+    font-size: 14px;
   }
   .checkbox-label {
-    font-size: 9px;
+    font-size: 12px;
     gap: 7px;
   }
   .search-ideas {
@@ -3812,7 +3855,7 @@ main {
     gap: 8px;
   }
   .search-ideas button {
-    font-size: 8px;
+    font-size: 12px;
     text-align: left;
   }
   .search-result {
@@ -3820,21 +3863,21 @@ main {
     gap: 16px;
   }
   .result-number {
-    font-size: 24px;
+    font-size: 26px;
   }
   .search-result h3 {
-    font-size: 20px;
+    font-size: 22px;
   }
   .search-result p {
-    font-size: 12px;
+    font-size: 14px;
   }
   .saved-indicator {
-    font-size: 8px;
+    font-size: 12px;
     line-height: 1.8;
     flex-wrap: wrap;
   }
   .subtle-note {
-    font-size: 9px;
+    font-size: 12px;
     text-align: center;
   }
   .chat-panel {
@@ -3847,10 +3890,10 @@ main {
     gap: 10px;
   }
   .chat-header strong {
-    font-size: 11px;
+    font-size: 14px;
   }
   .chat-header div > span {
-    font-size: 8px;
+    font-size: 12px;
   }
   .chat-messages {
     padding: 17px 15px;
@@ -3859,19 +3902,19 @@ main {
     padding: 13px 0;
   }
   .chat-welcome h2 {
-    font-size: 23px;
+    font-size: 25px;
   }
   .chat-welcome > p {
-    font-size: 11px;
+    font-size: 14px;
   }
   .prompt-grid > button {
     padding: 14px 12px;
   }
   .prompt-grid > button > span {
-    font-size: 9px;
+    font-size: 12px;
   }
   .prompt-grid p {
-    font-size: 9px;
+    font-size: 12px;
   }
   .prompt-grid svg {
     right: 8px;
@@ -3881,15 +3924,15 @@ main {
     margin: 0 13px 10px;
   }
   .chat-composer textarea {
-    font-size: 11px;
+    font-size: 14px;
   }
   .chat-footnote {
-    font-size: 7px;
+    font-size: 12px;
     margin-bottom: 14px;
   }
   .message-bubble {
     padding: 13px;
-    font-size: 11px;
+    font-size: 14px;
   }
   .chat-message.user {
     margin-left: 25px;
@@ -3908,14 +3951,14 @@ main {
     padding: 20px;
   }
   .progress-stat > strong {
-    font-size: 30px;
+    font-size: 32px;
     margin-top: 15px;
   }
   .progress-stat h3 {
-    font-size: 11px;
+    font-size: 14px;
   }
   .progress-stat p {
-    font-size: 8px;
+    font-size: 12px;
   }
   .progress-grid .panel {
     padding: 24px;
@@ -3926,14 +3969,14 @@ main {
     padding: 13px 0 0;
   }
   .chart-day > span {
-    font-size: 8px;
+    font-size: 12px;
   }
   .weak-words {
     grid-template-columns: 1fr;
     gap: 0;
   }
   .weak-panel .section-heading h2 {
-    font-size: 17px;
+    font-size: 19px;
   }
   .settings-grid {
     gap: 27px;
@@ -3951,19 +3994,19 @@ main {
     gap: 14px;
   }
   .settings-title h2 {
-    font-size: 18px;
+    font-size: 20px;
   }
   .settings-section label {
-    font-size: 12px;
+    font-size: 14px;
   }
   .settings-form-grid select {
-    font-size: 10px;
+    font-size: 12px;
   }
   .push-setting {
     flex-wrap: wrap;
   }
   .setting-toggle p {
-    font-size: 9px;
+    font-size: 12px;
   }
   .settings-grid > div > .button {
     width: 100%;
@@ -3997,12 +4040,12 @@ main {
     display: block;
   }
   .auth-story-content > .eyebrow {
-    font-size: 7px;
+    font-size: 12px;
     letter-spacing: 1.3px;
     margin-bottom: 14px;
   }
   .auth-intro {
-    font-size: 11px;
+    font-size: 14px;
     margin-top: 17px;
   }
   .word-illustration,
@@ -4023,28 +4066,28 @@ main {
     padding: 19px 0 24px;
   }
   .auth-form-wrap h2 {
-    font-size: 30px;
+    font-size: 32px;
   }
   .auth-form-wrap .subtitle {
-    font-size: 12px;
+    font-size: 14px;
     margin-bottom: 25px;
   }
   .auth-form-wrap label {
-    font-size: 12px;
+    font-size: 14px;
   }
   .auth-form-wrap input {
-    font-size: 13px;
+    font-size: 15px;
     min-height: 47px;
   }
   .auth-form-wrap .button {
-    font-size: 12px;
+    font-size: 14px;
   }
   .auth-bottom-note {
-    font-size: 7px;
+    font-size: 12px;
     margin-bottom: 5px;
   }
   .welcome-content > .eyebrow {
-    font-size: 8px;
+    font-size: 12px;
   }
   .welcome-sparkle {
     font-size: 35px;
@@ -4060,28 +4103,28 @@ main {
     display: block;
   }
   .welcome-content > p:not(.eyebrow) {
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 20px;
     max-width: 390px;
   }
   .welcome-foot {
     margin-top: 26px;
-    font-size: 9px;
+    font-size: 12px;
   }
   .auth-switch {
-    font-size: 11px;
+    font-size: 14px;
   }
   .modal {
     padding: 24px;
   }
   .modal-heading h2 {
-    font-size: 19px;
+    font-size: 21px;
   }
   .modal-actions {
     flex-direction: column-reverse;
   }
   .connection-banner {
-    font-size: 10px;
+    font-size: 12px;
     padding: 10px 15px;
     line-height: 1.7;
     flex-wrap: wrap;
@@ -4099,7 +4142,7 @@ main {
     padding-right: 18px;
   }
   .dashboard-greeting h1 {
-    font-size: 24px;
+    font-size: 26px;
   }
   .daily-review-card {
     padding: 23px 20px;
@@ -4115,13 +4158,13 @@ main {
     width: 100%;
   }
   .auth-story h1 {
-    font-size: 33px;
+    font-size: 35px;
   }
   .page-heading h1 {
-    font-size: 24px;
+    font-size: 26px;
   }
   .question-card h2 {
-    font-size: 21px;
+    font-size: 23px;
   }
   .prompt-grid {
     grid-template-columns: 1fr;
@@ -4133,10 +4176,10 @@ main {
     padding: 17px;
   }
   .progress-stat h3 {
-    font-size: 10px;
+    font-size: 12px;
   }
   .profile-preview p {
-    font-size: 9px;
+    font-size: 12px;
   }
   .settings-form-grid {
     grid-template-columns: 1fr;
@@ -4152,5 +4195,74 @@ main {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Readable controls and one setting per row at every screen size. */
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+.settings-grid,
+.settings-grid > aside {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+.settings-grid {
+  max-width: 900px;
+}
+.settings-form-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+.settings-form-grid label {
+  margin-bottom: 0;
+  min-width: 0;
+}
+.settings-form-grid {
+  margin-bottom: 24px;
+}
+.settings-section input,
+.settings-section select {
+  width: 100%;
+  font-size: 16px;
+  min-width: 0;
+}
+.setting-toggle,
+.push-setting {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.settings-section .button {
+  white-space: normal;
+}
+.settings-grid > *,
+.settings-title > div,
+.profile-preview > div {
+  min-width: 0;
+}
+.settings-section p {
+  overflow-wrap: anywhere;
+}
+.pwa-standalone,
+.pwa-standalone body,
+.pwa-standalone #root,
+.pwa-standalone .modal {
+  touch-action: pan-x pan-y;
+}
+@media (max-width: 700px) {
+  /* Avoid automatic focus zoom on small text fields. */
+  input,
+  select,
+  textarea,
+  .auth-form-wrap input,
+  .meaning-input input,
+  .chat-composer textarea,
+  .pronunciation-controls select {
+    font-size: 16px;
+  }
+  .word-title-row {
+    flex-wrap: wrap;
   }
 }

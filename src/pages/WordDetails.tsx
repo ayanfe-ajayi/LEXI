@@ -14,7 +14,14 @@ import {
 import { useData } from "../app/providers/DataProvider";
 import { useAuth } from "../app/providers/AuthProvider";
 import { ErrorNotice, useToast } from "../app/providers/UIProvider";
-import { Empty, Spinner, Meter, Pronounce, Modal } from "../components/ui";
+import {
+  Empty,
+  Spinner,
+  Meter,
+  Pronounce,
+  PronunciationText,
+  Modal,
+} from "../components/ui";
 import { updateWord, deleteWord } from "../services/vocabulary";
 import { errorMessage } from "../lib/api";
 import { average, dateLabel, relativeDate } from "../lib/utils";
@@ -80,7 +87,7 @@ export function WordDetails() {
             />
           </div>
           <div className="pronunciation-line">
-            {word.words.pronunciations[0]?.ipa || "English pronunciation"}
+            <PronunciationText pronunciations={word.words.pronunciations} />
             <span className={`status-tag ${word.status}`}>{word.status}</span>
           </div>
         </div>

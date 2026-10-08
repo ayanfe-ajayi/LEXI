@@ -22,7 +22,13 @@ import {
 } from "../services/review";
 import { enqueueReview, queuedReviews } from "../services/offline";
 import { errorMessage } from "../lib/api";
-import { Spinner, Empty, PageHeading, Pronounce } from "../components/ui";
+import {
+  Spinner,
+  Empty,
+  PageHeading,
+  Pronounce,
+  PronunciationText,
+} from "../components/ui";
 import type { Question, ReviewResult, ReviewType } from "../types";
 const labels: Record<ReviewType, string> = {
   meaning: "In your own words",
@@ -305,6 +311,9 @@ export function Review({ quiz = false }: { quiz?: boolean }) {
               )}
               {q.type === "pronunciation" && (
                 <div className="speech-actions">
+                  <PronunciationText
+                    pronunciations={q.word.words.pronunciations}
+                  />
                   <Pronounce
                     word={q.word.words.word}
                     audio={q.word.words.pronunciations[0]?.audio_url}

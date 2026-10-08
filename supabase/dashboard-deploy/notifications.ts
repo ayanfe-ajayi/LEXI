@@ -1,4 +1,5 @@
-// Generated from supabase/functions. Paste all of this into the Dashboard index.ts.
+// @ts-nocheck
+// Generated JavaScript from checked TypeScript. Paste all of this into the Dashboard index.ts.
 
 // supabase/functions/notifications/index.ts
 import { z } from "npm:zod@4.1.11";

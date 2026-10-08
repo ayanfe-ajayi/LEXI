@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, Check, Loader2, Search, Sparkles } from "lucide-react";
-import { Modal, Pronounce } from "../ui";
+import { Modal, Pronounce, PronunciationText } from "../ui";
 import { ErrorNotice, useToast } from "../../app/providers/UIProvider";
 import { useData } from "../../app/providers/DataProvider";
 import { analyzeWord, saveWord } from "../../services/vocabulary";
@@ -145,6 +145,7 @@ export function AddWord({
               audio={entry.pronunciations[0]?.audio_url}
             />
           </div>
+          <PronunciationText pronunciations={entry.pronunciations} />
           {entry.senses.slice(0, 3).map((sense, i) => (
             <div className="preview-sense" key={i}>
               <span className="eyebrow">

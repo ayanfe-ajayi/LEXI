@@ -25,13 +25,37 @@ export async function aiRequest(path: string, payload: unknown): Promise<any> {
   } catch {
     throw new AppError(503, "The AI service took too long. Please try again.");
   }
-  if (!response.ok)
+  if (!response.ok) {
+    const detail = await response.json().catch(() => null);
+    const code = detail?.error?.code;
+    const type = detail?.error?.type;
+    const billing =
+      [
+        "insufficient_quota",
+        "credit_balance_exhausted",
+        "billing_hard_limit_reached",
+        "organization_spend_limit_exceeded",
+        "project_spend_limit_exceeded",
+        "organization_usage_limit_exceeded",
+      ].includes(code) || type === "insufficient_quota";
+    // Never log provider payloads, which can include request content.
+    console.warn("AI provider request failed", {
+      status: response.status,
+      category: billing
+        ? "billing"
+        : response.status === 429
+          ? "rate_limit"
+          : "provider",
+    });
     throw new AppError(
       response.status === 429 ? 429 : 503,
-      response.status === 429
-        ? "The AI service is busy. Please try again shortly."
-        : "The AI service is unavailable. Please try again.",
+      billing
+        ? "The AI account has no available credits or has reached its spending limit. Check the provider's billing settings."
+        : response.status === 429
+          ? "The AI service is busy. Please try again shortly."
+          : "The AI service is unavailable. Please try again.",
     );
+  }
   return response.json();
 }
 export function model(strong = false) {

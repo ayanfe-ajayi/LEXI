@@ -266,7 +266,6 @@ export function SettingsPage() {
                   <option value="weekdays">Weekdays</option>
                 </select>
               </label>
-              <div />
             </div>
             <p className="eyebrow">A LITTLE QUIET TIME</p>
             <div className="settings-form-grid">
