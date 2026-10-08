@@ -1,6 +1,12 @@
 [build]
 command = "npm run build"
 publish = "dist"
+
+[build.environment]
+# These two values are public browser configuration embedded by Vite.
+# Continue scanning all other environment variables and repository files.
+SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_URL,VITE_SUPABASE_PUBLISHABLE_KEY"
+
 [[redirects]]
 from = "/*"
 to = "/index.html"
