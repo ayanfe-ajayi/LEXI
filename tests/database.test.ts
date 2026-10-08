@@ -108,6 +108,34 @@ async function review(
   ).rows[0].result;
 }
 describe("actual migrations and learning transactions", () => {
+  it("isolates embedding models and keeps personal search scoped to its owner", async () => {
+    const vector = `[${[1, ...Array(1535).fill(0)].join(",")}]`;
+    await pg.query(
+      "insert into word_sense_embeddings(sense_id,content,embedding,model) values($1,'test',$2,'old-model')",
+      [senses[0].id, vector],
+    );
+    const search = async (user: string, space: string, mine = true) =>
+      (
+        await pg.query(
+          "select * from hybrid_search_v2($1,'unrelatedxyz',$2,$3,$4)",
+          [user, vector, mine, space],
+        )
+      ).rows;
+    expect(await search(A, "new-model")).toHaveLength(0);
+    expect(await search(A, "old-model")).toHaveLength(1);
+    expect(await search(B, "old-model")).toHaveLength(0);
+    expect(await search(B, "old-model", false)).toHaveLength(1);
+    expect(
+      (
+        await pg.query(
+          "select * from hybrid_search_v2($1,'meticulous',null,true,null)",
+          [A],
+        )
+      ).rows,
+    ).toHaveLength(2);
+    await asUser(A);
+    await expect(search(A, "old-model")).rejects.toThrow(/permission denied/i);
+  });
   it("caches canonical lookup without adding a personal word", async () => {
     await pg.query("select public.save_lexical_word(null,$1,'','','')", [
       JSON.stringify({ ...entry, word: "careful" }),

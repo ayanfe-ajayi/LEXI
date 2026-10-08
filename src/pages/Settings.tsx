@@ -135,7 +135,7 @@ export function SettingsPage() {
         });
         if (!result.indexed)
           throw new Error(
-            "Configure AI_API_KEY in the backend before indexing your collection.",
+            "The AI connection is not configured. Check your server settings for meaning search.",
           );
       }
       toast("Your collection is ready for meaning search.");

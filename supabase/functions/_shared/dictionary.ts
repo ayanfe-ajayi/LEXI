@@ -1,6 +1,11 @@
 import { z } from "zod";
 import { AppError, type Admin, check } from "./http.ts";
-import { aiAvailable, structured, embedding } from "./ai/client.ts";
+import {
+  aiAvailable,
+  structured,
+  embedding,
+  embeddingSpace,
+} from "./ai/client.ts";
 import { entrySchema, enrichmentSchema, type Entry } from "./ai/schemas.ts";
 const providerSchema = z
   .array(
@@ -307,6 +312,7 @@ export async function lookup(db: Admin, word: string): Promise<Entry> {
 }
 export async function indexWord(db: Admin, wordId: string) {
   if (!aiAvailable()) return false;
+  const space = embeddingSpace();
   const senses = check(
     await db
       .from("word_senses")
@@ -318,17 +324,17 @@ export async function indexWord(db: Admin, wordId: string) {
     const old = check(
       await db
         .from("word_sense_embeddings")
-        .select("content")
+        .select("content,model")
         .eq("sense_id", sense.id)
         .maybeSingle(),
     );
-    if (old?.content === content) continue;
+    if (old?.content === content && old.model === space) continue;
     const vector = await embedding(content);
     check(
       await db
         .from("word_sense_embeddings")
         .upsert(
-          { sense_id: sense.id, content, embedding: vector },
+          { sense_id: sense.id, content, embedding: vector, model: space },
           { onConflict: "sense_id" },
         ),
     );

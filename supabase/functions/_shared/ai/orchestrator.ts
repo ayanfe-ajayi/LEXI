@@ -19,17 +19,29 @@ export async function tutor(
     });
     const next = response.choices?.[0]?.message;
     if (!next) throw new AppError(502, "The tutor could not respond.");
+    if (next.tool_calls?.length > 12)
+      throw new AppError(
+        502,
+        "The tutor requested too much information. Try a more focused question.",
+      );
     messages.push(next);
     if (!next.tool_calls?.length) break;
-    for (const call of next.tool_calls.slice(0, 3)) {
+    for (const [index, call] of next.tool_calls.entries()) {
       let result;
       try {
-        result = await executeTool(
-          db,
-          user,
-          call.function.name,
-          JSON.parse(call.function.arguments),
-        );
+        // Gemini may emit parallel calls. Acknowledge each while bounding data access.
+        result =
+          index >= 3
+            ? {
+                error:
+                  "Tool limit reached for this round. Use the information already retrieved.",
+              }
+            : await executeTool(
+                db,
+                user,
+                call.function.name,
+                JSON.parse(call.function.arguments),
+              );
       } catch (error) {
         result = {
           error:

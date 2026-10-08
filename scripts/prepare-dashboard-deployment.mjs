@@ -30,4 +30,5 @@ for (const name of ['vocabulary', 'review', 'reverse-search', 'ai', 'notificatio
 const migrations = (await readdir('supabase/migrations')).filter(name => name.endsWith('.sql')).sort();
 const statements = await Promise.all(migrations.map(async name => `-- ${name}\n${await readFile(`supabase/migrations/${name}`, 'utf8')}`));
 await writeFile(`${output}/setup.sql`, `-- Fresh projects only. Run once as postgres in the Supabase SQL Editor.\n-- Includes all migrations in order, in one transaction.\nbegin;\n${statements.join('\n\n')}\ncommit;\n`);
+await writeFile(`${output}/gemini-upgrade.sql`, `-- Existing Lexi projects: run this in the Supabase SQL Editor before deploying Gemini functions.\nbegin;\n${await readFile('supabase/migrations/202610080005_embedding_models.sql', 'utf8')}\ncommit;\n`);
 console.log('Prepared dashboard SQL and five single-file functions. No cloud changes made.');

@@ -103,24 +103,51 @@ async function body(req) {
 
 // supabase/functions/_shared/ai/client.ts
 import { z } from "npm:zod@4.1.11";
-var aiAvailable = () => Boolean(Deno.env.get("AI_API_KEY"));
+function provider() {
+  const selected = Deno.env.get("AI_PROVIDER");
+  if (selected && !["gemini", "openai"].includes(selected))
+    throw new AppError(503, "AI_PROVIDER must be gemini or openai.");
+  return selected || (Deno.env.get("GEMINI_API_KEY") ? "gemini" : "openai");
+}
+var aiAvailable = () => Boolean(
+  Deno.env.get(provider() === "gemini" ? "GEMINI_API_KEY" : "AI_API_KEY")
+);
 async function aiRequest(path, payload) {
-  const key = Deno.env.get("AI_API_KEY");
+  const google = provider() === "gemini";
+  const key = Deno.env.get(google ? "GEMINI_API_KEY" : "AI_API_KEY");
   if (!key)
     throw new AppError(
       503,
-      "Your AI tutor is not configured yet. Add AI_API_KEY to the server secrets."
+      `Your AI tutor is not configured yet. Add ${google ? "GEMINI_API_KEY" : "AI_API_KEY"} to the server secrets.`
     );
-  const base = (Deno.env.get("AI_BASE_URL") || "https://api.openai.com/v1").replace(/\/$/, "");
+  const base = (google ? "https://generativelanguage.googleapis.com/v1beta/openai" : Deno.env.get("AI_BASE_URL") || "https://api.openai.com/v1").replace(/\/$/, "");
+  let url = `${base}/${path}`;
+  let requestPayload = payload;
+  let headers = {
+    Authorization: `Bearer ${key}`,
+    "Content-Type": "application/json"
+  };
+  if (google && path === "embeddings") {
+    const input = payload;
+    url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(input.model)}:embedContent`;
+    headers = { "x-goog-api-key": key, "Content-Type": "application/json" };
+    requestPayload = {
+      content: { parts: [{ text: input.input }] },
+      outputDimensionality: 1536
+    };
+  } else if (google && path === "chat/completions") {
+    const input = { ...payload };
+    delete input.parallel_tool_calls;
+    if (String(input.model).startsWith("gemini-2.5-flash"))
+      input.reasoning_effort = "none";
+    requestPayload = input;
+  }
   let response;
   try {
-    response = await fetch(`${base}/${path}`, {
+    response = await fetch(url, {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${key}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload),
+      headers,
+      body: JSON.stringify(requestPayload),
       signal: AbortSignal.timeout(4e4)
     });
   } catch {
@@ -144,13 +171,37 @@ async function aiRequest(path, payload) {
     });
     throw new AppError(
       response.status === 429 ? 429 : 503,
-      billing ? "The AI account has no available credits or has reached its spending limit. Check the provider's billing settings." : response.status === 429 ? "The AI service is busy. Please try again shortly." : "The AI service is unavailable. Please try again."
+      google && response.status === 429 ? "Google's AI request limit has been reached. Please try again later. You can check your quota in Google AI Studio." : google && [401, 403].includes(response.status) ? "Google could not authorise this request. Check GEMINI_API_KEY and the project's API access." : billing ? "The AI account has no available credits or has reached its spending limit. Check the provider's billing settings." : response.status === 429 ? "The AI service is busy. Please try again shortly." : "The AI service is unavailable. Please try again."
     );
   }
   return response.json();
 }
 function model(strong = false) {
+  if (provider() === "gemini")
+    return Deno.env.get(strong ? "GEMINI_TUTOR_MODEL" : "GEMINI_MODEL") || (strong ? "gemini-2.5-flash" : "gemini-2.5-flash-lite");
   return Deno.env.get(strong ? "AI_TUTOR_MODEL" : "AI_MODEL") || "gpt-4.1-mini";
+}
+function embeddingModel() {
+  return provider() === "gemini" ? Deno.env.get("GEMINI_EMBEDDING_MODEL") || "gemini-embedding-2" : Deno.env.get("AI_EMBEDDING_MODEL") || "text-embedding-3-small";
+}
+function embeddingSpace() {
+  const host = provider() === "gemini" ? "google" : (Deno.env.get("AI_BASE_URL") || "https://api.openai.com/v1").replace(
+    /\/$/,
+    ""
+  );
+  return `${host}:${embeddingModel()}:1536`;
+}
+async function optionalEmbedding(text) {
+  if (!aiAvailable()) return null;
+  try {
+    return await embedding(text);
+  } catch (error) {
+    if (!(error instanceof AppError)) throw error;
+    console.warn("Meaning search using text fallback", {
+      status: error.status
+    });
+    return null;
+  }
 }
 async function structured(schema, system, input, strong = false) {
   const jsonSchema = z.toJSONSchema(schema);
@@ -184,13 +235,19 @@ async function structured(schema, system, input, strong = false) {
 }
 async function embedding(text) {
   const result = await aiRequest("embeddings", {
-    model: Deno.env.get("AI_EMBEDDING_MODEL") || "text-embedding-3-small",
+    model: embeddingModel(),
     input: text,
     dimensions: 1536
   });
-  const vector = result.data?.[0]?.embedding;
+  const vector = provider() === "gemini" ? result.embedding?.values : result.data?.[0]?.embedding;
   if (!Array.isArray(vector) || vector.length !== 1536 || !vector.every((n) => typeof n === "number" && Number.isFinite(n)))
     throw new AppError(502, "Meaning search could not process this query.");
+  if (provider() === "gemini") {
+    const magnitude = Math.hypot(...vector);
+    if (!magnitude)
+      throw new AppError(502, "Meaning search could not process this query.");
+    return vector.map((n) => n / magnitude);
+  }
   return vector;
 }
 
@@ -202,23 +259,29 @@ serve(async (req) => {
     mine: z2.boolean().default(true)
   }).parse(await body(req));
   await quota(db, user.id);
-  const vector = aiAvailable() ? await embedding(data.query) : null;
+  const vector = await optionalEmbedding(data.query);
   const results = check(
-    await db.rpc("hybrid_search", {
+    await db.rpc("hybrid_search_v2", {
       p_user: user.id,
       p_query: data.query,
       p_embedding: vector,
-      p_mine: data.mine
+      p_mine: data.mine,
+      p_embedding_model: vector ? embeddingSpace() : null
     })
   );
   let explanation = "";
-  if (results?.length && aiAvailable()) {
-    const response = await structured(
-      z2.object({ explanation: z2.string().max(1800) }),
-      "Explain the distinctions between the supplied vocabulary results in a few useful sentences. Say when matches are approximate. Do not invent personal history or words absent from the results.",
-      { query: data.query, results }
-    );
-    explanation = response.explanation;
+  if (results?.length && vector && aiAvailable()) {
+    try {
+      const response = await structured(
+        z2.object({ explanation: z2.string().max(1800) }),
+        "Explain the distinctions between the supplied vocabulary results in a few useful sentences. Say when matches are approximate. Do not invent personal history or words absent from the results.",
+        { query: data.query, results }
+      );
+      explanation = response.explanation;
+    } catch (error) {
+      if (!(error instanceof AppError)) throw error;
+      console.warn("Search explanation skipped", { status: error.status });
+    }
   }
   return { results, explanation, mode: vector ? "hybrid" : "text" };
 });

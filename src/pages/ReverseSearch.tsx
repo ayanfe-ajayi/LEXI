@@ -122,7 +122,7 @@ export function ReverseSearch() {
             <span className="subtle">
               {mode === "hybrid"
                 ? "Meaning + text search"
-                : "Text search · AI not configured"}
+                : "Text search · semantic search unavailable"}
             </span>
           </div>
           {explanation && (

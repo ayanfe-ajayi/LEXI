@@ -103,23 +103,48 @@ async function body(req) {
 
 // supabase/functions/_shared/ai/client.ts
 import { z } from "npm:zod@4.1.11";
+function provider() {
+  const selected = Deno.env.get("AI_PROVIDER");
+  if (selected && !["gemini", "openai"].includes(selected))
+    throw new AppError(503, "AI_PROVIDER must be gemini or openai.");
+  return selected || (Deno.env.get("GEMINI_API_KEY") ? "gemini" : "openai");
+}
 async function aiRequest(path, payload) {
-  const key = Deno.env.get("AI_API_KEY");
+  const google = provider() === "gemini";
+  const key = Deno.env.get(google ? "GEMINI_API_KEY" : "AI_API_KEY");
   if (!key)
     throw new AppError(
       503,
-      "Your AI tutor is not configured yet. Add AI_API_KEY to the server secrets."
+      `Your AI tutor is not configured yet. Add ${google ? "GEMINI_API_KEY" : "AI_API_KEY"} to the server secrets.`
     );
-  const base = (Deno.env.get("AI_BASE_URL") || "https://api.openai.com/v1").replace(/\/$/, "");
+  const base = (google ? "https://generativelanguage.googleapis.com/v1beta/openai" : Deno.env.get("AI_BASE_URL") || "https://api.openai.com/v1").replace(/\/$/, "");
+  let url = `${base}/${path}`;
+  let requestPayload = payload;
+  let headers = {
+    Authorization: `Bearer ${key}`,
+    "Content-Type": "application/json"
+  };
+  if (google && path === "embeddings") {
+    const input2 = payload;
+    url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(input2.model)}:embedContent`;
+    headers = { "x-goog-api-key": key, "Content-Type": "application/json" };
+    requestPayload = {
+      content: { parts: [{ text: input2.input }] },
+      outputDimensionality: 1536
+    };
+  } else if (google && path === "chat/completions") {
+    const input2 = { ...payload };
+    delete input2.parallel_tool_calls;
+    if (String(input2.model).startsWith("gemini-2.5-flash"))
+      input2.reasoning_effort = "none";
+    requestPayload = input2;
+  }
   let response;
   try {
-    response = await fetch(`${base}/${path}`, {
+    response = await fetch(url, {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${key}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload),
+      headers,
+      body: JSON.stringify(requestPayload),
       signal: AbortSignal.timeout(4e4)
     });
   } catch {
@@ -143,12 +168,14 @@ async function aiRequest(path, payload) {
     });
     throw new AppError(
       response.status === 429 ? 429 : 503,
-      billing ? "The AI account has no available credits or has reached its spending limit. Check the provider's billing settings." : response.status === 429 ? "The AI service is busy. Please try again shortly." : "The AI service is unavailable. Please try again."
+      google && response.status === 429 ? "Google's AI request limit has been reached. Please try again later. You can check your quota in Google AI Studio." : google && [401, 403].includes(response.status) ? "Google could not authorise this request. Check GEMINI_API_KEY and the project's API access." : billing ? "The AI account has no available credits or has reached its spending limit. Check the provider's billing settings." : response.status === 429 ? "The AI service is busy. Please try again shortly." : "The AI service is unavailable. Please try again."
     );
   }
   return response.json();
 }
 function model(strong = false) {
+  if (provider() === "gemini")
+    return Deno.env.get(strong ? "GEMINI_TUTOR_MODEL" : "GEMINI_MODEL") || (strong ? "gemini-2.5-flash" : "gemini-2.5-flash-lite");
   return Deno.env.get(strong ? "AI_TUTOR_MODEL" : "AI_MODEL") || "gpt-4.1-mini";
 }
 async function structured(schema, system, input2, strong = false) {

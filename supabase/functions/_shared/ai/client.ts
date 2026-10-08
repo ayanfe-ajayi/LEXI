@@ -1,25 +1,57 @@
 import { z } from "zod";
 import { AppError } from "../http.ts";
-export const aiAvailable = () => Boolean(Deno.env.get("AI_API_KEY"));
+export function provider() {
+  const selected = Deno.env.get("AI_PROVIDER");
+  if (selected && !["gemini", "openai"].includes(selected))
+    throw new AppError(503, "AI_PROVIDER must be gemini or openai.");
+  return selected || (Deno.env.get("GEMINI_API_KEY") ? "gemini" : "openai");
+}
+export const aiAvailable = () =>
+  Boolean(
+    Deno.env.get(provider() === "gemini" ? "GEMINI_API_KEY" : "AI_API_KEY"),
+  );
 export async function aiRequest(path: string, payload: unknown): Promise<any> {
-  const key = Deno.env.get("AI_API_KEY");
+  const google = provider() === "gemini";
+  const key = Deno.env.get(google ? "GEMINI_API_KEY" : "AI_API_KEY");
   if (!key)
     throw new AppError(
       503,
-      "Your AI tutor is not configured yet. Add AI_API_KEY to the server secrets.",
+      `Your AI tutor is not configured yet. Add ${google ? "GEMINI_API_KEY" : "AI_API_KEY"} to the server secrets.`,
     );
   const base = (
-    Deno.env.get("AI_BASE_URL") || "https://api.openai.com/v1"
+    google
+      ? "https://generativelanguage.googleapis.com/v1beta/openai"
+      : Deno.env.get("AI_BASE_URL") || "https://api.openai.com/v1"
   ).replace(/\/$/, "");
+  let url = `${base}/${path}`;
+  let requestPayload = payload;
+  let headers: Record<string, string> = {
+    Authorization: `Bearer ${key}`,
+    "Content-Type": "application/json",
+  };
+  if (google && path === "embeddings") {
+    // Native endpoint explicitly controls dimensionality for our pgvector schema.
+    const input = payload as { model: string; input: string };
+    url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(input.model)}:embedContent`;
+    headers = { "x-goog-api-key": key, "Content-Type": "application/json" };
+    requestPayload = {
+      content: { parts: [{ text: input.input }] },
+      outputDimensionality: 1536,
+    };
+  } else if (google && path === "chat/completions") {
+    const input = { ...(payload as Record<string, unknown>) };
+    delete input.parallel_tool_calls;
+    // Flash/Lite can answer these bounded vocabulary tasks without a thinking budget.
+    if (String(input.model).startsWith("gemini-2.5-flash"))
+      input.reasoning_effort = "none";
+    requestPayload = input;
+  }
   let response: Response;
   try {
-    response = await fetch(`${base}/${path}`, {
+    response = await fetch(url, {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${key}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
+      headers,
+      body: JSON.stringify(requestPayload),
       signal: AbortSignal.timeout(40_000),
     });
   } catch {
@@ -49,17 +81,53 @@ export async function aiRequest(path: string, payload: unknown): Promise<any> {
     });
     throw new AppError(
       response.status === 429 ? 429 : 503,
-      billing
-        ? "The AI account has no available credits or has reached its spending limit. Check the provider's billing settings."
-        : response.status === 429
-          ? "The AI service is busy. Please try again shortly."
-          : "The AI service is unavailable. Please try again.",
+      google && response.status === 429
+        ? "Google's AI request limit has been reached. Please try again later. You can check your quota in Google AI Studio."
+        : google && [401, 403].includes(response.status)
+          ? "Google could not authorise this request. Check GEMINI_API_KEY and the project's API access."
+          : billing
+            ? "The AI account has no available credits or has reached its spending limit. Check the provider's billing settings."
+            : response.status === 429
+              ? "The AI service is busy. Please try again shortly."
+              : "The AI service is unavailable. Please try again.",
     );
   }
   return response.json();
 }
 export function model(strong = false) {
+  if (provider() === "gemini")
+    return (
+      Deno.env.get(strong ? "GEMINI_TUTOR_MODEL" : "GEMINI_MODEL") ||
+      (strong ? "gemini-2.5-flash" : "gemini-2.5-flash-lite")
+    );
   return Deno.env.get(strong ? "AI_TUTOR_MODEL" : "AI_MODEL") || "gpt-4.1-mini";
+}
+export function embeddingModel() {
+  return provider() === "gemini"
+    ? Deno.env.get("GEMINI_EMBEDDING_MODEL") || "gemini-embedding-2"
+    : Deno.env.get("AI_EMBEDDING_MODEL") || "text-embedding-3-small";
+}
+export function embeddingSpace() {
+  const host =
+    provider() === "gemini"
+      ? "google"
+      : (Deno.env.get("AI_BASE_URL") || "https://api.openai.com/v1").replace(
+          /\/$/,
+          "",
+        );
+  return `${host}:${embeddingModel()}:1536`;
+}
+export async function optionalEmbedding(text: string) {
+  if (!aiAvailable()) return null;
+  try {
+    return await embedding(text);
+  } catch (error) {
+    if (!(error instanceof AppError)) throw error;
+    console.warn("Meaning search using text fallback", {
+      status: error.status,
+    });
+    return null;
+  }
 }
 export async function structured<T>(
   schema: z.ZodType<T>,
@@ -98,16 +166,25 @@ export async function structured<T>(
 }
 export async function embedding(text: string): Promise<number[]> {
   const result = await aiRequest("embeddings", {
-    model: Deno.env.get("AI_EMBEDDING_MODEL") || "text-embedding-3-small",
+    model: embeddingModel(),
     input: text,
     dimensions: 1536,
   });
-  const vector = result.data?.[0]?.embedding;
+  const vector =
+    provider() === "gemini"
+      ? result.embedding?.values
+      : result.data?.[0]?.embedding;
   if (
     !Array.isArray(vector) ||
     vector.length !== 1536 ||
     !vector.every((n) => typeof n === "number" && Number.isFinite(n))
   )
     throw new AppError(502, "Meaning search could not process this query.");
+  if (provider() === "gemini") {
+    const magnitude = Math.hypot(...vector);
+    if (!magnitude)
+      throw new AppError(502, "Meaning search could not process this query.");
+    return vector.map((n: number) => n / magnitude);
+  }
   return vector;
 }
