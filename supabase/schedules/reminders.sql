@@ -11,3 +11,4 @@ select cron.schedule('lexi-intelligent-reminders','*/15 * * * *',$job$
     body := '{"action":"dispatch"}'::jsonb
   );
 $job$);
+    
