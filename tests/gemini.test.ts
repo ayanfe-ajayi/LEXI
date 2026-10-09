@@ -32,8 +32,8 @@ describe("Gemini integration", () => {
   it("selects Google when its key is saved and ignores old OpenAI settings", async () => {
     expect(provider()).toBe("gemini");
     expect(aiAvailable()).toBe(true);
-    expect(model()).toBe("gemini-2.5-flash-lite");
-    expect(model(true)).toBe("gemini-2.5-flash");
+    expect(model()).toBe("gemini-3.5-flash-lite");
+    expect(model(true)).toBe("gemini-3.5-flash-lite");
     expect(embeddingSpace()).toBe("google:gemini-embedding-2:1536");
     const fetchMock = vi.fn(async () => Response.json({ choices: [] }));
     vi.stubGlobal("fetch", fetchMock);
@@ -52,7 +52,7 @@ describe("Gemini integration", () => {
     const payload = JSON.parse(options.body);
     expect(payload.tool_choice).toBe("required");
     expect(payload.parallel_tool_calls).toBeUndefined();
-    expect(payload.reasoning_effort).toBe("none");
+    expect(payload.reasoning_effort).toBeUndefined();
   });
   it("keeps explicit OpenAI configuration available", () => {
     secrets.AI_PROVIDER = "openai";
@@ -60,6 +60,54 @@ describe("Gemini integration", () => {
     expect(model()).toBe("old-model");
     delete secrets.AI_API_KEY;
     expect(aiAvailable()).toBe(false);
+  });
+  it("uses explicit current Google model settings without disabling Gemini 3 thinking", async () => {
+    secrets.GEMINI_MODEL = "gemini-3.5-flash-lite";
+    secrets.GEMINI_TUTOR_MODEL = "gemini-3.5-flash-lite";
+    const fetchMock = vi.fn(async () => Response.json({ choices: [] }));
+    vi.stubGlobal("fetch", fetchMock);
+    await aiRequest("chat/completions", { model: model(true), messages: [] });
+    const options = fetchMock.mock.calls[0][1] as any;
+    expect(JSON.parse(options.body).reasoning_effort).toBeUndefined();
+  });
+  it("distinguishes unavailable models from invalid keys and logs no private provider message", async () => {
+    const fetchMock = vi.fn(async () =>
+      Response.json(
+        { error: { status: "NOT_FOUND", message: "private prompt echo" } },
+        { status: 404 },
+      ),
+    );
+    vi.stubGlobal("fetch", fetchMock);
+    await expect(
+      aiRequest("chat/completions", { model: model() }),
+    ).rejects.toThrow("model is unavailable");
+    expect(vi.mocked(console.warn).mock.calls[0][1]).toMatchObject({
+      model: model(),
+      request: "chat/completions",
+      category: "model_unavailable",
+      provider_status: "NOT_FOUND",
+    });
+    fetchMock.mockImplementation(async () =>
+      Response.json(
+        {
+          error: {
+            status: "INVALID_ARGUMENT",
+            message: "API key not valid. secret-key-value",
+            details: [{ reason: "API_KEY_INVALID" }],
+          },
+        },
+        { status: 400 },
+      ),
+    );
+    await expect(
+      aiRequest("embeddings", {
+        model: "gemini-embedding-2",
+        input: "private user query",
+      }),
+    ).rejects.toThrow("Google rejected the API key");
+    const logged = JSON.stringify(vi.mocked(console.warn).mock.calls);
+    expect(logged).not.toContain("private");
+    expect(logged).not.toContain("secret-key-value");
   });
   it("validates structured Google responses and rejects malformed output", async () => {
     const fetchMock = vi.fn(async () =>

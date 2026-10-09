@@ -67,8 +67,8 @@ These are Supabase Edge Function secrets. The defaults need no additional setup.
 | Secret | Default |
 | --- | --- |
 | `AI_PROVIDER` | `gemini` when `GEMINI_API_KEY` is present |
-| `GEMINI_MODEL` | `gemini-2.5-flash-lite` |
-| `GEMINI_TUTOR_MODEL` | `gemini-2.5-flash` |
+| `GEMINI_MODEL` | `gemini-3.5-flash-lite` |
+| `GEMINI_TUTOR_MODEL` | `gemini-3.5-flash-lite` |
 | `GEMINI_EMBEDDING_MODEL` | `gemini-embedding-2` |
 
 Changing the embedding provider or model requires preparing meaning search again.
@@ -80,3 +80,29 @@ Google's [pricing](https://ai.google.dev/gemini-api/docs/pricing) lists free-tie
 availability and data use; check your project's current
 [quotas](https://ai.google.dev/gemini-api/docs/rate-limits) in AI Studio.
 Model availability and free limits can change.
+
+## If AI features fail after deployment
+
+Google now restricts Gemini 2.5 access for new projects. In Supabase
+**Edge Functions → Secrets**, explicitly set:
+
+| Secret | Value |
+| --- | --- |
+| `AI_PROVIDER` | `gemini` |
+| `GEMINI_MODEL` | `gemini-3.5-flash-lite` |
+| `GEMINI_TUTOR_MODEL` | `gemini-3.5-flash-lite` |
+| `GEMINI_EMBEDDING_MODEL` | `gemini-embedding-2` |
+
+These model names must be available to your project; check Google AI Studio.
+After updating functions, retry one tutor message. For failures, inspect the
+function's logs for **AI provider request failed**: it includes the request type,
+model, HTTP status, and a safe error category. It never logs your key or conversation.
+
+- `model_unavailable` / 404: select an available model in AI Studio and update the corresponding secret.
+- `invalid_key`: re-copy the full Gemini API key into `GEMINI_API_KEY` without quotes or spaces.
+- 401 / 403: check the key's Gemini API access and project permissions.
+- `rate_limit` / 429: inspect your free quota in AI Studio; changing models does not guarantee quota.
+- `invalid_request` / 400: provide the safe log fields and app error to diagnose the request format.
+- A missing `hybrid_search_v2` function: run `gemini-upgrade.sql`, not the fresh-project `setup.sql`.
+
+See [Google's current model availability](https://ai.google.dev/gemini-api/docs/models).

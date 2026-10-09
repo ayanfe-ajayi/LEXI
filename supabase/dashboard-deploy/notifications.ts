@@ -30,6 +30,11 @@ function adminClient() {
 function check(result) {
   if (result.error) {
     console.error("Database operation failed:", result.error.message);
+    if (/hybrid_search_v2/i.test(result.error.message))
+      throw new AppError(
+        503,
+        "Lexi needs its Google database update. Run gemini-upgrade.sql in the Supabase SQL Editor, then try again."
+      );
     throw new AppError(
       503,
       "Your data could not be updated. Please try again."

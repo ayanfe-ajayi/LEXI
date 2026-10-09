@@ -31,6 +31,21 @@ const request = () =>
     body: JSON.stringify({ query: "hoards money", mine: true }),
   });
 describe("meaning search resilience", () => {
+  it("identifies a missing database upgrade instead of returning a vague failure", async () => {
+    mocks.optionalEmbedding.mockResolvedValue(null);
+    mocks.db.rpc.mockResolvedValue({
+      data: null,
+      error: {
+        message:
+          "Could not find the function public.hybrid_search_v2 in the schema cache",
+      },
+    });
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    await expect(mocks.handler(request())).rejects.toThrow(
+      "Run gemini-upgrade.sql",
+    );
+    error.mockRestore();
+  });
   it("returns real text matches when semantic embedding is unavailable", async () => {
     mocks.optionalEmbedding.mockResolvedValue(null);
     const result = await mocks.handler(request());

@@ -29,6 +29,11 @@ function adminClient() {
 function check(result) {
   if (result.error) {
     console.error("Database operation failed:", result.error.message);
+    if (/hybrid_search_v2/i.test(result.error.message))
+      throw new AppError(
+        503,
+        "Lexi needs its Google database update. Run gemini-upgrade.sql in the Supabase SQL Editor, then try again."
+      );
     throw new AppError(
       503,
       "Your data could not be updated. Please try again."
@@ -157,6 +162,10 @@ async function aiRequest(path, payload) {
     const detail = await response.json().catch(() => null);
     const code = detail?.error?.code;
     const type = detail?.error?.type;
+    const googleStatus = detail?.error?.status;
+    const invalidKey = google && /API[_ ]KEY[_ ]INVALID|API key not valid|invalid API key/i.test(
+      `${googleStatus || ""} ${detail?.error?.message || ""} ${JSON.stringify(detail?.error?.details || [])}`
+    );
     const billing = [
       "insufficient_quota",
       "credit_balance_exhausted",
@@ -166,19 +175,23 @@ async function aiRequest(path, payload) {
       "organization_usage_limit_exceeded"
     ].includes(code) || type === "insufficient_quota";
     console.warn("AI provider request failed", {
+      provider: google ? "gemini" : "openai",
+      request: path,
       status: response.status,
-      category: billing ? "billing" : response.status === 429 ? "rate_limit" : "provider"
+      model: typeof payload?.model === "string" && /^[a-zA-Z0-9._-]{1,100}$/.test(payload.model) ? payload.model : "custom",
+      provider_status: typeof googleStatus === "string" && /^[A-Z_]{1,60}$/.test(googleStatus) ? googleStatus : void 0,
+      category: invalidKey ? "invalid_key" : google && response.status === 404 ? "model_unavailable" : google && response.status === 400 ? "invalid_request" : billing ? "billing" : response.status === 429 ? "rate_limit" : "provider"
     });
     throw new AppError(
       response.status === 429 ? 429 : 503,
-      google && response.status === 429 ? "Google's AI request limit has been reached. Please try again later. You can check your quota in Google AI Studio." : google && [401, 403].includes(response.status) ? "Google could not authorise this request. Check GEMINI_API_KEY and the project's API access." : billing ? "The AI account has no available credits or has reached its spending limit. Check the provider's billing settings." : response.status === 429 ? "The AI service is busy. Please try again shortly." : "The AI service is unavailable. Please try again."
+      invalidKey ? "Google rejected the API key. Copy the full key from Google AI Studio into GEMINI_API_KEY in Supabase secrets, without quotes or extra spaces." : google && response.status === 404 ? "The configured Google model is unavailable for this project. Check GEMINI_MODEL, GEMINI_TUTOR_MODEL and GEMINI_EMBEDDING_MODEL in Supabase secrets." : google && response.status === 400 ? "Google rejected the AI request. Check the function's logs for the model and request type, and confirm the latest Lexi functions are deployed." : google && response.status === 429 ? "Google's AI request limit has been reached. Please try again later. You can check your quota in Google AI Studio." : google && [401, 403].includes(response.status) ? "Google could not authorise this request. Check GEMINI_API_KEY and the project's API access." : billing ? "The AI account has no available credits or has reached its spending limit. Check the provider's billing settings." : response.status === 429 ? "The AI service is busy. Please try again shortly." : "The AI service is unavailable. Please try again."
     );
   }
   return response.json();
 }
 function model(strong = false) {
   if (provider() === "gemini")
-    return Deno.env.get(strong ? "GEMINI_TUTOR_MODEL" : "GEMINI_MODEL") || (strong ? "gemini-2.5-flash" : "gemini-2.5-flash-lite");
+    return Deno.env.get(strong ? "GEMINI_TUTOR_MODEL" : "GEMINI_MODEL") || "gemini-3.5-flash-lite";
   return Deno.env.get(strong ? "AI_TUTOR_MODEL" : "AI_MODEL") || "gpt-4.1-mini";
 }
 function embeddingModel() {
