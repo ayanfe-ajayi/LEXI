@@ -128,6 +128,7 @@ export interface ReviewResult {
   queued?: boolean;
 }
 export interface SearchResult {
+  match_quality?: "strong" | "approximate";
   sense_id: string;
   word_id: string;
   word: string;

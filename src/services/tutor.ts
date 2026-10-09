@@ -8,7 +8,8 @@ export function searchMeaning(query: string, mine: boolean) {
   return invoke<{
     results: SearchResult[];
     explanation: string;
-    mode: "hybrid" | "text";
+    mode: "hybrid" | "text" | "discovery";
+    notice?: string;
   }>("reverse-search", { query, mine });
 }
 export async function tutorSessions(user: string) {

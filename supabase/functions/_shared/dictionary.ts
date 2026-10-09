@@ -187,7 +187,11 @@ async function dictionaryPayload(
     "The dictionary providers could not complete this lookup. Your word has not been saved; please try again.",
   );
 }
-export async function lookup(db: Admin, word: string): Promise<Entry> {
+export async function lookup(
+  db: Admin,
+  word: string,
+  options: { enrich?: boolean } = {},
+): Promise<Entry> {
   const existing = check(
     await db
       .from("words")
@@ -238,7 +242,7 @@ export async function lookup(db: Admin, word: string): Promise<Entry> {
       ),
     )
     .slice(0, 12);
-  if (aiAvailable()) {
+  if (options.enrich !== false && aiAvailable()) {
     try {
       const enriched = await structured(
         enrichmentSchema,

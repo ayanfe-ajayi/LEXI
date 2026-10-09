@@ -56,9 +56,17 @@ Archived words are excluded; restore them and prepare search if you want them in
 - Search for a saved word by its meaning.
 
 If the semantic API is temporarily unavailable, meaning search uses text matches.
-If an explanation fails, matching words still appear. Tutor chat and AI grading
+If AI relevance checking fails, reverse search falls back to text matches rather
+than displaying weak semantic neighbours. Tutor chat and AI grading
 report their error rather than inventing an answer. The shared word collection is
-still the words already looked up in Lexi, not the entire English dictionary.
+searched when AI discovery is unavailable. With AI available and the saved-only
+checkbox unchecked, Lexi suggests broader English words and checks their meanings
+against the dictionary before ranking them. Suggestions are never automatically
+added to your personal vocabulary. A relevance check can reject every candidate.
+
+For this reverse-search improvement, redeploy the updated `reverse-search` and
+`ai` dashboard files, then commit/sync the frontend changes to GitHub for Netlify.
+No additional SQL migration is required beyond the existing Gemini upgrade.
 
 ## Optional server settings
 

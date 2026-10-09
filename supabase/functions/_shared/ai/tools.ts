@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { type Admin, check, AppError } from "../http.ts";
-import { optionalEmbedding, embeddingSpace } from "./client.ts";
+import { meaningSearch } from "./meaning-search.ts";
 import { lookup } from "../dictionary.ts";
 const toolNames = {
   search_my_vocabulary:
@@ -109,15 +109,11 @@ export async function executeTool(
     }
     case "search_word_meaning":
     case "semantic_search_vocabulary": {
-      const vector = await optionalEmbedding(query);
-      return check(
-        await db.rpc("hybrid_search_v2", {
-          p_user: user,
-          p_query: query,
-          p_embedding: vector,
-          p_mine: name === "semantic_search_vocabulary",
-          p_embedding_model: vector ? embeddingSpace() : null,
-        }),
+      return await meaningSearch(
+        db,
+        user,
+        query,
+        name === "semantic_search_vocabulary",
       );
     }
     case "get_words_due_for_review":

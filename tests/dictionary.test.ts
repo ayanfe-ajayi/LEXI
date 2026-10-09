@@ -95,6 +95,16 @@ afterEach(() => {
 });
 
 describe("dictionary lookup resilience", () => {
+  it("verifies reverse-search suggestions without spending another AI enrichment request", async () => {
+    vi.mocked(aiAvailable).mockReturnValue(true);
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => Response.json(fallbackEntry)),
+    );
+    const entry = await lookup(database() as any, "miser", { enrich: false });
+    expect(entry.senses[0].ai_enriched).toBe(false);
+    expect(vi.mocked(structured)).not.toHaveBeenCalled();
+  });
   it("uses the working Wiktionary provider immediately without calling the slow provider", async () => {
     const fetchMock = vi.fn(async () => Response.json(fallbackEntry));
     vi.stubGlobal("fetch", fetchMock);

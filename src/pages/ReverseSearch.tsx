@@ -27,6 +27,7 @@ export function ReverseSearch() {
   const [results, setResults] = useState<SearchResult[] | null>(null);
   const [explanation, setExplanation] = useState("");
   const [mode, setMode] = useState("");
+  const [notice, setNotice] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   async function search(e?: FormEvent, value = query) {
@@ -35,11 +36,15 @@ export function ReverseSearch() {
     setQuery(value);
     setBusy(true);
     setError("");
+    setResults(null);
+    setExplanation("");
+    setNotice("");
     try {
       const result = await searchMeaning(value, mine);
       setResults(result.results);
       setExplanation(result.explanation);
       setMode(result.mode);
+      setNotice(result.notice || "");
     } catch (e) {
       setError(errorMessage(e));
     } finally {
@@ -88,9 +93,12 @@ export function ReverseSearch() {
             <input
               type="checkbox"
               checked={mine}
+              disabled={busy}
               onChange={(e) => {
                 setMine(e.target.checked);
                 setResults(null);
+                setExplanation("");
+                setNotice("");
               }}
             />
             Search only my saved vocabulary
@@ -120,11 +128,18 @@ export function ReverseSearch() {
                 : "Let’s try another description."}
             </h2>
             <span className="subtle">
-              {mode === "hybrid"
-                ? "Meaning + text search"
-                : "Text search · semantic search unavailable"}
+              {mode === "discovery"
+                ? "Broader word suggestions"
+                : mode === "hybrid"
+                  ? "Meaning + text search"
+                  : "Text search · semantic search unavailable"}
             </span>
           </div>
+          {notice && (
+            <p className="tiny-note" role="status">
+              {notice}
+            </p>
+          )}
           {explanation && (
             <div className="search-explanation">
               <Sparkles size={20} />
@@ -142,6 +157,9 @@ export function ReverseSearch() {
                     <span className="word-pos">{r.part_of_speech}</span>
                     <h3>{r.word}</h3>
                     <p>{r.simple_definition}</p>
+                    {r.match_quality === "approximate" && (
+                      <span className="subtle">Approximate match</span>
+                    )}
                     {r.in_vocabulary && (
                       <div className="saved-indicator">
                         <Check size={14} />
@@ -167,13 +185,18 @@ export function ReverseSearch() {
             <div className="panel">
               <Empty
                 title="No matching word senses yet."
-                description="Try a shorter description or search the shared word collection. Meaning search improves as you save and index more words."
+                description={
+                  mine
+                    ? "Try a clearer description, or uncheck ‘Search only my saved vocabulary’ to discover other words."
+                    : "Try a clearer description, an example sentence, or a different wording."
+                }
               />
             </div>
           )}
           <p className="tiny-note">
-            The shared collection contains words already looked up in Lexi. It
-            is not a complete dictionary.
+            {mine
+              ? "Searching your saved vocabulary."
+              : "Broader suggestions are checked against dictionary definitions. They are not automatically added to your vocabulary."}
           </p>
         </section>
       )}

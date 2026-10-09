@@ -473,7 +473,7 @@ async function dictionaryPayload(word) {
     "The dictionary providers could not complete this lookup. Your word has not been saved; please try again."
   );
 }
-async function lookup(db, word) {
+async function lookup(db, word, options = {}) {
   const existing = check(
     await db.from("words").select("word, word_senses(*, word_examples(*)), pronunciations(*)").eq("normalized_word", word).eq("language", "en").maybeSingle()
   );
@@ -513,7 +513,7 @@ async function lookup(db, word) {
       }))
     )
   ).slice(0, 12);
-  if (aiAvailable()) {
+  if (options.enrich !== false && aiAvailable()) {
     try {
       const enriched = await structured(
         enrichmentSchema,
